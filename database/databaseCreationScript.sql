@@ -15,7 +15,17 @@ CREATE TABLE IF NOT EXISTS `car_rent`.`users` (
   `FirstName` CHAR(32) NOT NULL,
   `LastName` CHAR(32) NOT NULL,
   PRIMARY KEY (`UserID`)
+);
+
+CREATE TABLE IF NOT EXISTS `car_rent`.`cars` (
+  `CarID` INT(11) NOT NULL AUTO_INCREMENT,
+  `Make` CHAR(32) NOT NULL,
+  `Model` CHAR(32) NOT NULL,
+  `ProductionYear` INT(4) NOT NULL,
+  `EngineCapacity` DECIMAL(2,1) NOT NULL,
+  PRIMARY KEY (`CarID`)
 )
+
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
 
