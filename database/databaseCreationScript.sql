@@ -32,3 +32,35 @@ AUTO_INCREMENT = 1002;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Table `Java2_test`.`cars`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `car_rent`.`cars` ;
+
+CREATE TABLE IF NOT EXISTS `car_rent`.`cars` (
+  `CarID` INT(11) NOT NULL AUTO_INCREMENT,
+  `CarName` CHAR(50) NOT NULL,
+  `LicenceNum` CHAR(20) NOT NULL,
+  `TechInspection` ENUM('0','1') NOT NULL,
+  `TechInspExpire` DATE NOT NULL,
+  `FreeToRent` ENUM('0','1') NOT NULL,
+  `EngineNum` CHAR(32) NOT NULL,
+  `ChassisNum` CHAR(32) NOT NULL,
+  `Insured` ENUM('0','1') NOT NULL,
+  `InsuranceExpire` DATE NOT NULL,
+  PRIMARY KEY (`CarID`)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 1002;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Insert one row into Table 'cars'
+-- -----------------------------------------------------
+
+INSERT INTO cars (`CarName`,`LicenceNum`,`TechInspection`,`TechInspExpire`,`FreeToRent`,`EngineNum`,`ChassisNum`,`Insured`,`InsuranceExpire`) VALUES ('Mercedes C200','CD3789','1','2016-09-15','1','23123123123135','fdsfdfsdf31312','1','2016-08-13');
