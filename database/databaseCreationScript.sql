@@ -64,3 +64,36 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 
 INSERT INTO cars (`CarName`,`LicenceNum`,`TechInspection`,`TechInspExpire`,`FreeToRent`,`EngineNum`,`ChassisNum`,`Insured`,`InsuranceExpire`) VALUES ('Mercedes C200','CD3789','1','2016-09-15','1','23123123123135','fdsfdfsdf31312','1','2016-08-13');
+
+
+-- -------------------------------------------------------------------------
+-- Новая таблица 'vehicles'. Т.к. решили хранить всю технику в одной таблице
+-- -------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `car_rent`.`vehicles` (
+  `CarID` INT(11) NOT NULL AUTO_INCREMENT,
+  `VehicleType` CHAR(32) NOT NULL,
+  `Make` CHAR(32) NOT NULL,
+  `Model` CHAR(32) NOT NULL,
+  `ProductionYear` INT(4) NOT NULL,
+  `EngineCapacity` DECIMAL(2,1) NOT NULL,
+  `FuelType` CHAR(32) NOT NULL,
+  `FuelConsumption` DECIMAL(3,1) NOT NULL,
+  `RentPrice` DECIMAL(6,2) NOT NULL,
+  `IsAvailable` BOOL NOT NULL,
+  `EngineTypeByStrokes` CHAR(32),
+  `DriveType` CHAR(32),
+  `MotorcycleType` CHAR(32),
+  PRIMARY KEY (`CarID`)
+);
+
+-- -------------------------------------------------------------------------
+-- Пример создания записей нескольких моцаков
+-- -------------------------------------------------------------------------
+
+insert into VEHICLES
+(CarID, VehicleType, Make, Model, ProductionYear, EngineCapacity, FuelType, FuelConsumption, RentPrice, IsAvailable, EngineTypeByStrokes, DriveType, MotorcycleType)
+values
+  ('1', 'Motorcycle', 'Honda', 'CB600F Hornet', '2007', '0.6', 'Бензин', '6', '60', '1', '4-тактный', 'Цепь', 'Street'),
+  ('2', 'Motorcycle', 'Harley-Davidson', 'Dyna', '2009', '1.7', 'Бензин', '5.6', '90', '1', '2-тактный', 'Ремень', 'Chopper'),
+  ('3', 'Motorcycle', 'Yamaha', 'XVZ1300A', '2001', '1.3', 'Бензин', '7', '75', '1', '4-тактный', 'Кардан', 'Cruiser');
