@@ -33,38 +33,6 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
--- -----------------------------------------------------
--- Table `Java2_test`.`cars`
--- -----------------------------------------------------
-
-DROP TABLE IF EXISTS `car_rent`.`cars` ;
-
-CREATE TABLE IF NOT EXISTS `car_rent`.`cars` (
-  `CarID` INT(11) NOT NULL AUTO_INCREMENT,
-  `CarName` CHAR(50) NOT NULL,
-  `LicenceNum` CHAR(20) NOT NULL,
-  `TechInspection` ENUM('0','1') NOT NULL,
-  `TechInspExpire` DATE NOT NULL,
-  `FreeToRent` ENUM('0','1') NOT NULL,
-  `EngineNum` CHAR(32) NOT NULL,
-  `ChassisNum` CHAR(32) NOT NULL,
-  `Insured` ENUM('0','1') NOT NULL,
-  `InsuranceExpire` DATE NOT NULL,
-  PRIMARY KEY (`CarID`)
-)
-  ENGINE = InnoDB
-  AUTO_INCREMENT = 1002;
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
--- -----------------------------------------------------
--- Insert one row into Table 'cars'
--- -----------------------------------------------------
-
-INSERT INTO cars (`CarName`,`LicenceNum`,`TechInspection`,`TechInspExpire`,`FreeToRent`,`EngineNum`,`ChassisNum`,`Insured`,`InsuranceExpire`) VALUES ('Mercedes C200','CD3789','1','2016-09-15','1','23123123123135','fdsfdfsdf31312','1','2016-08-13');
-
 
 -- -------------------------------------------------------------------------
 -- Новая таблица 'vehicles'. Т.к. решили хранить всю технику в одной таблице
@@ -102,8 +70,8 @@ values
   ('3', 'Motorcycle', 'Yamaha', 'XVZ1300A', '2001', '1.3', 'Бензин', '7', '75', '1', '4-тактный', 'Кардан', 'Cruiser');
 
 insert into VEHICLES
-(CarID, VehicleType, Make, Model, ProductionYear, EngineCapacity, FuelType, FuelConsumption, RentPrice, IsAvailable, LuxuryType, NumberOfDoors, BodyType)
+(VehicleType, Make, Model, ProductionYear, EngineCapacity, FuelType, FuelConsumption, RentPrice, IsAvailable, LuxuryType, NumberOfDoors, BodyType)
 values
-  ('1', 'PersonalCar', 'Mercedes', 'C200', '2008', '2.0', 'Diesel', '10', '45', '1', 'Lux', '5', 'Sedan'),
-  ('2', 'PersonalCar', 'Toyota', 'RAV-4', '2009', '1.9', 'Fuel', '8.6', '50', '1', 'SUV', '5', 'SUV'),
-  ('3', 'PersonalCar', 'Volvo', 'V80', '2011', '1.8', 'Petrol', '7', '60', '1', 'Family', '5', 'Universal');
+  ('PersonalCar', 'Mercedes', 'C200', '2008', '2.0', 'Diesel', '10', '45', '1', 'Lux', '5', 'Sedan'),
+  ('PersonalCar', 'Toyota', 'RAV-4', '2009', '1.9', 'Fuel', '8.6', '50', '1', 'SUV', '5', 'SUV'),
+  ('PersonalCar', 'Volvo', 'V80', '2011', '1.8', 'Petrol', '7', '60', '1', 'Family', '5', 'Universal');
