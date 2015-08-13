@@ -97,3 +97,30 @@ values
   ('1', 'Motorcycle', 'Honda', 'CB600F Hornet', '2007', '0.6', 'Бензин', '6', '60', '1', '4-тактный', 'Цепь', 'Street'),
   ('2', 'Motorcycle', 'Harley-Davidson', 'Dyna', '2009', '1.7', 'Бензин', '5.6', '90', '1', '2-тактный', 'Ремень', 'Chopper'),
   ('3', 'Motorcycle', 'Yamaha', 'XVZ1300A', '2001', '1.3', 'Бензин', '7', '75', '1', '4-тактный', 'Кардан', 'Cruiser');
+
+
+-- -------------------------------------------------------------------------
+-- Новая таблица 'accessories'.
+-- -------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `car_rent`.`accessories` (
+  `AccessoryID` INT(11) NOT NULL AUTO_INCREMENT,
+  `Accessory` CHAR(32) NOT NULL,
+  `RentPrice` DECIMAL(6,2) NOT NULL,
+  `IsAvailableForMotorcycles` BOOL,
+  `IsAvailableForPersonalVehicles` BOOL,
+  `IsAvailableForPassengerVehicles` BOOL,
+  PRIMARY KEY (`AccessoryID`)
+);
+
+
+-- -------------------------------------------------------------------------
+-- Пример создания записей нескольких ACCESSORIES
+-- -------------------------------------------------------------------------
+
+insert into ACCESSORIES
+(AccessoryID, Accessory, RentPrice, IsAvailableForMotorcycles, IsAvailableForPersonalVehicles, IsAvailableForPassengerVehicles)
+values
+  ('1', 'GPS Navigator', '8', '1', '1', '1'),
+  ('2', 'Saddlebag', '5', '1', '0', '0'),
+  ('3', 'Slip-on Exhaust', '4', '1', '0', '0');

@@ -12,6 +12,7 @@ public interface MotorcycleDAO {
 
     void create(Motorcycle motorcycle) throws DBException;
     Motorcycle getByMake(String make) throws DBException;
+    Motorcycle getById(String id) throws DBException;
     List<Motorcycle> getAll() throws DBException;
 
 }

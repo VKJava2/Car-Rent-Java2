@@ -7,7 +7,10 @@ public class Accessory {
 
     private long accessoryId;
     private String accessory;
-    private int rentPrice;
+    private double rentPrice;
+    private boolean isAvailableForMotorcycles;
+    private boolean isAvailableForPersonalVehicles;
+    private boolean isAvailableForPassengerVehicles;
 
     public long getAccessoryId() {
         return accessoryId;
@@ -25,11 +28,35 @@ public class Accessory {
         this.accessory = accessory;
     }
 
-    public int getRentPrice() {
+    public double getRentPrice() {
         return rentPrice;
     }
 
-    public void setRentPrice(int rentPrice) {
+    public void setRentPrice(double rentPrice) {
         this.rentPrice = rentPrice;
+    }
+
+    public boolean isAvailableForMotorcycles() {
+        return isAvailableForMotorcycles;
+    }
+
+    public void setIsAvailableForMotorcycles(boolean isAvailableForMotorcycles) {
+        this.isAvailableForMotorcycles = isAvailableForMotorcycles;
+    }
+
+    public boolean isAvailableForPersonalVehicles() {
+        return isAvailableForPersonalVehicles;
+    }
+
+    public void setIsAvailableForPersonalVehicles(boolean isAvailableForPersonalVehicles) {
+        this.isAvailableForPersonalVehicles = isAvailableForPersonalVehicles;
+    }
+
+    public boolean isAvailableForPassengerVehicles() {
+        return isAvailableForPassengerVehicles;
+    }
+
+    public void setIsAvailableForPassengerVehicles(boolean isAvailableForPassengerVehicles) {
+        this.isAvailableForPassengerVehicles = isAvailableForPassengerVehicles;
     }
 }

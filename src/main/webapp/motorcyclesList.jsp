@@ -9,7 +9,7 @@
 		<h1>Congratz, some bikes are still available for rent</h1>
         <%
             List<Motorcycle> motorcycles = (List<Motorcycle>)request.getAttribute("model");
-            if(motorcycles != null) {
+            if(!motorcycles.isEmpty()) {
         %>
         <h2>Available bikes</h2>
         <table border="1">
@@ -26,6 +26,7 @@
                         <td><%=motorcycle.getEngineTypeByStrokes()%></td>
                         <td><%=motorcycle.getDriveType()%></td>
                         <td><%=motorcycle.getMotorcycleType()%></td>
+                        <td><a href="/java2/preOrder?id=<%=motorcycle.getCarId()%>">Order</a></td>
                     </tr>
                 <%}%>
         </table>
