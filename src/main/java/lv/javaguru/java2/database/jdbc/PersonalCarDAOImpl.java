@@ -208,7 +208,7 @@ public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
         }
     }
 
-    public List<PersonalCar> getByFuelType(String fuelType) throws DBException {
+    public List<PersonalCar> getByFuelType(String fuelType ) throws DBException {
         Connection connection = null;
 
         List<PersonalCar> foundCars = new ArrayList<PersonalCar>();
@@ -247,7 +247,7 @@ public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
         }
     }
 
-    public List<PersonalCar> getAll(String vehicleType) throws DBException {
+    public List<PersonalCar> getAll() throws DBException {
         Connection connection = null;
 
         List<PersonalCar> foundCars = new ArrayList<PersonalCar>();
@@ -277,7 +277,7 @@ public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
             }
             return foundCars;
         } catch (Throwable e) {
-            System.out.println("Exception while execute PersonalCarDAOImpl.getAll()");
+            System.out.println("Exception while execute PersonalCarDAOImpl.getByMake()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {

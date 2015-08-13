@@ -24,5 +24,5 @@ public interface PersonalCarDAO {
 
     void update(PersonalCar personalCar, Long carId) throws DBException;
 
-    List<PersonalCar> getAll(String vehicleType) throws DBException;
+    List<PersonalCar> getAll() throws DBException;
 }
