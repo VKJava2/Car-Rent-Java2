@@ -9,6 +9,7 @@ public abstract class Vehicle {
 
     private long carId;
     private String vehicleType;
+    private String image;
     private String make;
     private String model;
     private int productionYear;
@@ -33,6 +34,14 @@ public abstract class Vehicle {
 
     public void setVehicleType(String vehicleType) {
         this.vehicleType = vehicleType;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getMake() {
