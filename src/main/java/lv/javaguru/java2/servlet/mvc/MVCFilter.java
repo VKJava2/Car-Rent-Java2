@@ -32,7 +32,7 @@ public class MVCFilter implements Filter {
         controllers.put("/cars", getBean(CarController.class));
         controllers.put("/personalcars", getBean(PersonalCarController.class));
         controllers.put("/motorcycles", getBean(MotorcycleController.class));
-        controllers.put("/preOrder", getBean(PreOrderController.class));
+        controllers.put("/minibuses", getBean(MiniBusListAllController.class));
     }
 
     private MVCController getBean(Class clazz){
@@ -54,9 +54,9 @@ public class MVCFilter implements Filter {
             req.setAttribute("model", model.getData());
 
             ServletContext context = req.getServletContext();
-            RequestDispatcher requestDispacher =
+            RequestDispatcher requestDispatcher =
                     context.getRequestDispatcher(model.getJspName());
-            requestDispacher.forward(req, resp);
+            requestDispatcher.forward(req, resp);
         }
         else filterChain.doFilter(request,response);
     }

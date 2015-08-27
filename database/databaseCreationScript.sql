@@ -56,6 +56,9 @@ CREATE TABLE IF NOT EXISTS `car_rent`.`vehicles` (
   `LuxuryType` CHAR(32),
   `NumberOfDoors` CHAR(32),
   `BodyType` CHAR(32),
+  'MiniBusSeats' INT(2),
+  'CargoVolume' DECIMAL(4,2),
+  'MiniBusColor' CHAR(32),
   PRIMARY KEY (`CarID`)
 );
 
@@ -73,8 +76,18 @@ values
 insert into VEHICLES
 (VehicleType, Image, Make, Model, ProductionYear, EngineCapacity, FuelType, FuelConsumption, RentPrice, IsAvailable, LuxuryType, NumberOfDoors, BodyType)
 values
+  ('PersonalCar', 'Mercedes', 'C200', '2008', '2.0', 'Diesel', '10', '45', '1', 'Lux', '5', 'Sedan'),
+  ('PersonalCar', 'Toyota', 'RAV-4', '2009', '1.9', 'Fuel', '8.6', '50', '1', 'SUV', '5', 'SUV'),
+  ('PersonalCar', 'Volvo', 'V80', '2011', '1.8', 'Petrol', '7', '60', '1', 'Family', '5', 'Universal'),
   ('PersonalCar', 'mercedes_c200_2014.jpg', 'Mercedes', 'C200', '2014', '2.0', 'Diesel', '10', '45', '1', 'Lux', '5', 'Sedan'),
   ('PersonalCar', 'toyota_rav4_2014.jpg', 'Toyota', 'RAV-4', '2013', '1.9', 'Fuel', '8.6', '50', '1', 'SUV', '5', 'SUV'),
   ('PersonalCar', 'volvo_S80_2014.jpg', 'Volvo', 'S80', '2014', '1.8', 'Petrol', '7', '60', '1', 'Lux', '5', 'Sedan'),
   ('PersonalCar', 'mercedes_e180_2014.jpg', 'Mercedes', 'E180', '2010', '2.0', 'Diesel', '7.3', '60', '1', 'Lux', '5', 'Sedan'),
   ('PersonalCar', 'volvo_v60_2008.jpg', 'Volvo', 'V60', '2009', '1.6', 'Petrol', '5.5', '50', '1', 'Family', '5', 'Universal');
+
+insert into VEHICLES
+(VehicleType, Make, Model, ProductionYear, EngineCapacity, FuelType, FuelConsumption, RentPrice, IsAvailable, MiniBusSeats, CargoVolume, MiniBusColor)
+values
+  ('MiniBus', 'Scania', 'Hispano', '2005', '3.5', 'Diesel', '13.9', '85', '1', '12', '4.9', 'Yellow'),
+  ('MiniBus', 'Mercedes-Benz', 'Sprinter', '2013', '2.4', 'Gasoline', '14.4', '105', '1', '3', '50.7', 'Gray'),
+  ('MiniBus', 'Ford', 'Transit', '2007', '4.5', 'Diesel', '16.9', '74', '1', '16', '12.6', 'White');
