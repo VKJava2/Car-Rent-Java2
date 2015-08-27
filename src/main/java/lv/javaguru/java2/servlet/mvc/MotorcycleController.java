@@ -13,7 +13,7 @@ import java.util.List;
 public class MotorcycleController implements MVCController {
 
     @Autowired
-    private MotorcycleDAO motorcycleDAO;
+    private MotorcycleDAOImpl motorcycleDAO;
 
     public MVCModel processRequest(HttpServletRequest req) {
 

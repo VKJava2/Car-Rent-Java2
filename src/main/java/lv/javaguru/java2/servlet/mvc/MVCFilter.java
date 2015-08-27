@@ -30,6 +30,7 @@ public class MVCFilter implements Filter {
         }
 
         controllers.put("/cars", getBean(CarController.class));
+        controllers.put("/personalcars", getBean(PersonalCarController.class));
         controllers.put("/motorcycles", getBean(MotorcycleController.class));
         controllers.put("/preOrder", getBean(PreOrderController.class));
     }
