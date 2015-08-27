@@ -96,6 +96,42 @@ public class MotorcycleDAOImpl extends DAOImpl implements MotorcycleDAO {
         }
     }
 
+    public Motorcycle getById(String id) throws DBException {
+        Connection connection = null;
+
+        try {
+            connection = getConnection();
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("select * from VEHICLES where CarID = ?");
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Motorcycle motorcycle = null;
+            if (resultSet.next()) {
+                motorcycle = new Motorcycle();
+                motorcycle.setCarId(resultSet.getLong("CarID"));
+                motorcycle.setVehicleType(resultSet.getString("VehicleType"));
+                motorcycle.setMake(resultSet.getString("Make"));
+                motorcycle.setModel(resultSet.getString("Model"));
+                motorcycle.setProductionYear(resultSet.getInt("ProductionYear"));
+                motorcycle.setEngineCapacity(resultSet.getDouble("EngineCapacity"));
+                motorcycle.setFuelType(resultSet.getString("FuelType"));
+                motorcycle.setFuelConsumption(resultSet.getDouble("FuelConsumption"));
+                motorcycle.setRentPrice(resultSet.getDouble("RentPrice"));
+                motorcycle.setIsAvailable(resultSet.getBoolean("IsAvailable"));
+                motorcycle.setEngineTypeByStrokes(resultSet.getString("EngineTypeByStrokes"));
+                motorcycle.setDriveType(resultSet.getString("DriveType"));
+                motorcycle.setMotorcycleType(resultSet.getString("MotorcycleType"));
+            }
+            return motorcycle;
+        } catch (Throwable e) {
+            System.out.println("Exception while execute MotorcycleDAOImpl.getById()");
+            e.printStackTrace();
+            throw new DBException(e);
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
     public List<Motorcycle> getAll() throws DBException {
         List<Motorcycle> motorcycles = new ArrayList<Motorcycle>();
         Connection connection = null;
