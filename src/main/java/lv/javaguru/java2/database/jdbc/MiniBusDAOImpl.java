@@ -4,6 +4,7 @@ import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.MiniBusDAO;
 import lv.javaguru.java2.domain.Accessory;
 import lv.javaguru.java2.domain.MiniBus;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +15,8 @@ import java.util.List;
 /**
  * Created by XidenT on 02/08/2015.
  */
+
+@Component
 public class MiniBusDAOImpl extends DAOImpl implements MiniBusDAO {
 
     public void create(MiniBus miniBus) throws DBException {
