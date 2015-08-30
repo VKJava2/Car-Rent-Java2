@@ -32,7 +32,11 @@ public class MVCFilter implements Filter {
         controllers.put("/cars", getBean(CarController.class));
         controllers.put("/personalcars", getBean(PersonalCarController.class));
         controllers.put("/motorcycles", getBean(MotorcycleController.class));
+        controllers.put("/minibuses", getBean(MiniBusDeleteController.class));
+        controllers.put("/minibuses", getBean(MiniBusGetIDController.class));
         controllers.put("/minibuses", getBean(MiniBusListAllController.class));
+        controllers.put("/minibuses", getBean(MiniBusUpdateController.class));
+
     }
 
     private MVCController getBean(Class clazz){

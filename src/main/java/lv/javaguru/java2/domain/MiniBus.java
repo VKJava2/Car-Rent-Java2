@@ -1,7 +1,5 @@
 package lv.javaguru.java2.domain;
 
-import java.util.List;
-
 /**
  * Created by XidenT on 28/07/2015.
  */
