@@ -29,20 +29,21 @@ public class MiniBusDAOImpl extends DAOImpl implements MiniBusDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("INSERT INTO VEHICLES VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+                    connection.prepareStatement("INSERT INTO VEHICLES VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, miniBus.getVehicleType());
-            preparedStatement.setString(2, miniBus.getMake());
-            preparedStatement.setString(3, miniBus.getModel());
-            preparedStatement.setInt(4, miniBus.getProductionYear());
-            preparedStatement.setDouble(5, miniBus.getEngineCapacity());
-            preparedStatement.setString(6, miniBus.getFuelType());
-            preparedStatement.setDouble(7, miniBus.getFuelConsumption());
-            preparedStatement.setDouble(8, miniBus.getRentPrice());
-            preparedStatement.setBoolean(9, miniBus.isAvailable());
+            preparedStatement.setString(2, miniBus.getImage());
+            preparedStatement.setString(3, miniBus.getMake());
+            preparedStatement.setString(4, miniBus.getModel());
+            preparedStatement.setInt(5, miniBus.getProductionYear());
+            preparedStatement.setDouble(6, miniBus.getEngineCapacity());
+            preparedStatement.setString(7, miniBus.getFuelType());
+            preparedStatement.setDouble(8, miniBus.getFuelConsumption());
+            preparedStatement.setDouble(9, miniBus.getRentPrice());
+            preparedStatement.setBoolean(10, miniBus.isAvailable());
 //            preparedStatement.setObject(9, miniBus.getAccessories());
-            preparedStatement.setObject(10, miniBus.getSeatNumber());
-            preparedStatement.setObject(11, miniBus.getCargoVolume());
-            preparedStatement.setObject(12, miniBus.getMiniBusColor());
+            preparedStatement.setObject(11, miniBus.getSeatNumber());
+            preparedStatement.setObject(12, miniBus.getCargoVolume());
+            preparedStatement.setObject(13, miniBus.getMiniBusColor());
 
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -71,6 +72,7 @@ public class MiniBusDAOImpl extends DAOImpl implements MiniBusDAO {
             if (resultSet.next()) {
                 miniBus = new MiniBus();
                 miniBus.setCarId(resultSet.getLong("CarID"));
+                miniBus.setImage(resultSet.getString("Image"));
                 miniBus.setVehicleType(resultSet.getString("VehicleType"));
                 miniBus.setMake(resultSet.getString("Make"));
                 miniBus.setModel(resultSet.getString("Model"));
@@ -121,21 +123,22 @@ public class MiniBusDAOImpl extends DAOImpl implements MiniBusDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE VEHICLES SET VehicleType = ?, Make = ?, Model = ?, ProductionYear = ?, EngineCapacity = ?, FuelType = ?, FuelConsumption = ?, RentPrice = ?, IsAvailable = ?, /*Accessories = ?,*/ MiniBusSeats = ?, CargoVolume = ?, MiniBusColor = ?" +
+                    .prepareStatement("UPDATE VEHICLES SET VehicleType = ?, Image = ?, Make = ?, Model = ?, ProductionYear = ?, EngineCapacity = ?, FuelType = ?, FuelConsumption = ?, RentPrice = ?, IsAvailable = ?, /*Accessories = ?,*/ MiniBusSeats = ?, CargoVolume = ?, MiniBusColor = ?" +
                             "WHERE CarID = ?");
             preparedStatement.setString(1, miniBus.getVehicleType());
-            preparedStatement.setString(2, miniBus.getMake());
-            preparedStatement.setString(3, miniBus.getModel());
-            preparedStatement.setInt(4, miniBus.getProductionYear());
-            preparedStatement.setDouble(5, miniBus.getEngineCapacity());
-            preparedStatement.setString(6, miniBus.getFuelType());
-            preparedStatement.setDouble(7, miniBus.getFuelConsumption());
-            preparedStatement.setDouble(8, miniBus.getRentPrice());
-            preparedStatement.setBoolean(9, miniBus.isAvailable());
+            preparedStatement.setString(2, miniBus.getImage());
+            preparedStatement.setString(3, miniBus.getMake());
+            preparedStatement.setString(4, miniBus.getModel());
+            preparedStatement.setInt(5, miniBus.getProductionYear());
+            preparedStatement.setDouble(6, miniBus.getEngineCapacity());
+            preparedStatement.setString(7, miniBus.getFuelType());
+            preparedStatement.setDouble(8, miniBus.getFuelConsumption());
+            preparedStatement.setDouble(9, miniBus.getRentPrice());
+            preparedStatement.setBoolean(10, miniBus.isAvailable());
 //            preparedStatement.setObject(8, miniBus.getAccessories());
-            preparedStatement.setInt(10, miniBus.getSeatNumber());
-            preparedStatement.setDouble(11, miniBus.getCargoVolume());
-            preparedStatement.setString(12, miniBus.getMiniBusColor());
+            preparedStatement.setInt(11, miniBus.getSeatNumber());
+            preparedStatement.setDouble(12, miniBus.getCargoVolume());
+            preparedStatement.setString(13, miniBus.getMiniBusColor());
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
             System.out.println("Exception while executing MiniBusDAOImpl.update()");
@@ -157,6 +160,7 @@ public class MiniBusDAOImpl extends DAOImpl implements MiniBusDAO {
             while (resultSet.next()) {
                 MiniBus miniBus = new MiniBus();
                 miniBus.setCarId(resultSet.getLong("CarID"));
+                miniBus.setImage(resultSet.getString("Image"));
                 miniBus.setVehicleType(resultSet.getString("VehicleType"));
                 miniBus.setMake(resultSet.getString("Make"));
                 miniBus.setModel(resultSet.getString("Model"));
