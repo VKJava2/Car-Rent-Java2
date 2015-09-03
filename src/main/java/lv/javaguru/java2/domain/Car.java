@@ -1,14 +1,26 @@
 package lv.javaguru.java2.domain;
 
+import javax.persistence.*;
+
 /**
  * Created by VK on 2015.07.22..
  */
+
+@Entity
+@Table(name = "cars")
 public class Car {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="CarID")
     private long carId;
+    @Column(name="Make")
     private String make;
+    @Column(name="Model")
     private String model;
+    @Column(name="ProductionYear")
     private int productionYear;
+    @Column(name="EngineCapacity")
     private double engineCapacity;
 
     public long getCarId() {

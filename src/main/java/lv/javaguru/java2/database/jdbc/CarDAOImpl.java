@@ -15,7 +15,7 @@ import java.util.List;
  * Created by VK on 2015.07.22..
  */
 
-@Component
+@Component("CarDAO_JDBC")
 public class CarDAOImpl extends DAOImpl implements CarDAO {
 
     public void create(Car car) throws DBException {
