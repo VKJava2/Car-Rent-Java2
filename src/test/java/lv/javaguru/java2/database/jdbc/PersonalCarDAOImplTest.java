@@ -28,10 +28,11 @@ public class PersonalCarDAOImplTest {
         databaseCleaner.cleanDatabase();
     }
 
-    private PersonalCar createPersonalCar(String vehicleType, String make, String model, int productionYear, double engineCapacity, String fuelType, double fuelConsumption,
+    private PersonalCar createPersonalCar(String vehicleType, String image, String make, String model, int productionYear, double engineCapacity, String fuelType, double fuelConsumption,
                                           double rentPrice, boolean isAvailable, String luxuryType, String numberOfDoors, String bodyType) {
         PersonalCar personalCar = new PersonalCar();
         personalCar.setVehicleType(vehicleType);
+        personalCar.setImage(image);
         personalCar.setMake(make);
         personalCar.setModel(model);
         personalCar.setProductionYear(productionYear);
@@ -48,8 +49,8 @@ public class PersonalCarDAOImplTest {
 
     @Test
     public void testCreate() throws DBException {
-        PersonalCar personalCar = createPersonalCar("PersonalCar", "Mercedes Benz", "190", 1981, 1.9, "Diesel", 8.5, 25, true, "Economy", "5", "Sedan");
-        PersonalCar personalCar2 = createPersonalCar("PersonalCar", "Toyota", "Carola", 1985, 1.6, "Petrol", 7.5, 25, true, "Economy", "5", "Hatchback");
+        PersonalCar personalCar = createPersonalCar("PersonalCar", "Mercedes Benz", "mercedes_c200_2014.jpg", "190", 1981, 1.9, "Diesel", 8.5, 25, true, "Economy", "5", "Sedan");
+        PersonalCar personalCar2 = createPersonalCar("PersonalCar", "Toyota", "toyota_rav4_2014.jpg", "Carola", 1985, 1.6, "Petrol", 7.5, 25, true, "Economy", "5", "Hatchback");
 
         personalCarDAOImpl.create(personalCar);
         personalCarDAOImpl.create(personalCar2);
@@ -58,6 +59,7 @@ public class PersonalCarDAOImplTest {
         assertNotNull(listOfCars);
         assertEquals(personalCar.getCarId(), listOfCars.get(0).getCarId());
         assertEquals(personalCar.getVehicleType(), listOfCars.get(0).getVehicleType());
+        assertEquals(personalCar.getImage(), listOfCars.get(0).getImage());
         assertEquals(personalCar.getMake(), listOfCars.get(0).getMake());
         assertEquals(personalCar.getModel(), listOfCars.get(0).getModel());
         assertEquals(personalCar.getProductionYear(), listOfCars.get(0).getProductionYear());
@@ -74,9 +76,9 @@ public class PersonalCarDAOImplTest {
 
     @Test
     public void testGetAll() throws DBException {
-        PersonalCar personalCar = createPersonalCar("PersonalCar", "Mercedes Benz", "190", 1981, 1.9, "Diesel", 8.5, 25, true, "Economy", "5", "Sedan");
-        PersonalCar personalCar2 = createPersonalCar("PersonalCar", "Toyota", "Carola", 1985, 1.6, "Petrol", 7.5, 25, true, "Economy", "5", "Hatchback");
-        PersonalCar personalCarFake = createPersonalCar("Car", "Honda", "Civic", 2007, 0.6, "Petrol", 6, 60, true, "Urban", "3", "Sedan");
+        PersonalCar personalCar = createPersonalCar("PersonalCar", "Mercedes Benz", "mercedes_c200_2014.jpg", "190", 1981, 1.9, "Diesel", 8.5, 25, true, "Economy", "5", "Sedan");
+        PersonalCar personalCar2 = createPersonalCar("PersonalCar", "Toyota", "mercedes_c200_2012.jpg", "Carola", 1985, 1.6, "Petrol", 7.5, 25, true, "Economy", "5", "Hatchback");
+        PersonalCar personalCarFake = createPersonalCar("Car", "Honda", "mercedes_c200_2011.jpg", "Civic", 2007, 0.6, "Petrol", 6, 60, true, "Urban", "3", "Sedan");
         personalCarDAOImpl.create(personalCar);
         personalCarDAOImpl.create(personalCar2);
 
@@ -87,9 +89,9 @@ public class PersonalCarDAOImplTest {
 
     @Test
     public void testGetByFuelType() throws DBException {
-        PersonalCar personalCar = createPersonalCar("PersonalCar", "Mercedes Benz", "190", 1981, 1.9, "Diesel", 8.5, 25, true, "Economy", "5", "Sedan");
-        PersonalCar personalCar2 = createPersonalCar("PersonalCar", "Toyota", "Carola", 1985, 1.6, "Petrol", 7.5, 25, true, "Economy", "5", "Hatchback");
-        PersonalCar personalCar3 = createPersonalCar("PersonalCar", "Honda", "Civic", 2007, 0.6, "Petrol", 6, 60, true, "Urban", "3", "Sedan");
+        PersonalCar personalCar = createPersonalCar("PersonalCar", "Mercedes Benz", "mercedes_c200_2014.jpg", "190", 1981, 1.9, "Diesel", 8.5, 25, true, "Economy", "5", "Sedan");
+        PersonalCar personalCar2 = createPersonalCar("PersonalCar", "Toyota", "mercedes_c200_2012.jpg", "Carola", 1985, 1.6, "Petrol", 7.5, 25, true, "Economy", "5", "Hatchback");
+        PersonalCar personalCar3 = createPersonalCar("PersonalCar", "Honda", "mercedes_c200_2013.jpg", "Civic", 2007, 0.6, "Petrol", 6, 60, true, "Urban", "3", "Sedan");
         personalCarDAOImpl.create(personalCar);
         personalCarDAOImpl.create(personalCar2);
         personalCarDAOImpl.create(personalCar3);

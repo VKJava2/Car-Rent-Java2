@@ -26,21 +26,22 @@ public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("insert into VEHICLES (CarID, VehicleType, Make, Model, ProductionYear, EngineCapacity, " +
+                    connection.prepareStatement("insert into VEHICLES (CarID, VehicleType, Image, Make, Model, ProductionYear, EngineCapacity, " +
                             "FuelType, FuelConsumption, RentPrice, IsAvailable, LuxuryType, NumberOfDoors, BodyType) " +
-                            "values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+                            "values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, personalCar.getVehicleType());
-            preparedStatement.setString(2, personalCar.getMake());
-            preparedStatement.setString(3, personalCar.getModel());
-            preparedStatement.setInt(4, personalCar.getProductionYear());
-            preparedStatement.setDouble(5, personalCar.getEngineCapacity());
-            preparedStatement.setString(6, personalCar.getFuelType());
-            preparedStatement.setDouble(7, personalCar.getFuelConsumption());
-            preparedStatement.setDouble(8, personalCar.getRentPrice());
-            preparedStatement.setBoolean(9, personalCar.isAvailable());
-            preparedStatement.setString(10, personalCar.getLuxuryType());
-            preparedStatement.setString(11, personalCar.getNumberOfDoors());
-            preparedStatement.setString(12, personalCar.getBodyType());
+            preparedStatement.setString(2, personalCar.getImage());
+            preparedStatement.setString(3, personalCar.getMake());
+            preparedStatement.setString(4, personalCar.getModel());
+            preparedStatement.setInt(5, personalCar.getProductionYear());
+            preparedStatement.setDouble(6, personalCar.getEngineCapacity());
+            preparedStatement.setString(7, personalCar.getFuelType());
+            preparedStatement.setDouble(8, personalCar.getFuelConsumption());
+            preparedStatement.setDouble(9, personalCar.getRentPrice());
+            preparedStatement.setBoolean(10, personalCar.isAvailable());
+            preparedStatement.setString(11, personalCar.getLuxuryType());
+            preparedStatement.setString(12, personalCar.getNumberOfDoors());
+            preparedStatement.setString(13, personalCar.getBodyType());
 
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -71,6 +72,7 @@ public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
                 personalCar = new PersonalCar();
                 personalCar.setCarId(resultSet.getLong("CarID"));
                 personalCar.setVehicleType(resultSet.getString("VehicleType"));
+                personalCar.setImage(resultSet.getString("Image"));
                 personalCar.setMake(resultSet.getString("Make"));
                 personalCar.setModel(resultSet.getString("Model"));
                 personalCar.setProductionYear(resultSet.getInt("ProductionYear"));
@@ -109,6 +111,7 @@ public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
                 PersonalCar personalCar = new PersonalCar();
                 personalCar.setCarId(resultSet.getLong("CarID"));
                 personalCar.setVehicleType(resultSet.getString("VehicleType"));
+                personalCar.setImage(resultSet.getString("Image"));
                 personalCar.setMake(resultSet.getString("Make"));
                 personalCar.setModel(resultSet.getString("Model"));
                 personalCar.setProductionYear(resultSet.getInt("ProductionYear"));
@@ -147,6 +150,7 @@ public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
                 PersonalCar personalCar = new PersonalCar();
                 personalCar.setCarId(resultSet.getLong("CarID"));
                 personalCar.setVehicleType(resultSet.getString("VehicleType"));
+                personalCar.setImage(resultSet.getString("Image"));
                 personalCar.setMake(resultSet.getString("Make"));
                 personalCar.setModel(resultSet.getString("Model"));
                 personalCar.setProductionYear(resultSet.getInt("ProductionYear"));
@@ -185,6 +189,7 @@ public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
                 PersonalCar personalCar = new PersonalCar();
                 personalCar.setCarId(resultSet.getLong("CarID"));
                 personalCar.setVehicleType(resultSet.getString("VehicleType"));
+                personalCar.setImage(resultSet.getString("Image"));
                 personalCar.setMake(resultSet.getString("Make"));
                 personalCar.setModel(resultSet.getString("Model"));
                 personalCar.setProductionYear(resultSet.getInt("ProductionYear"));
@@ -224,6 +229,7 @@ public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
                 PersonalCar personalCar = new PersonalCar();
                 personalCar.setCarId(resultSet.getLong("CarID"));
                 personalCar.setVehicleType(resultSet.getString("VehicleType"));
+                personalCar.setImage(resultSet.getString("Image"));
                 personalCar.setMake(resultSet.getString("Make"));
                 personalCar.setModel(resultSet.getString("Model"));
                 personalCar.setProductionYear(resultSet.getInt("ProductionYear"));
@@ -262,6 +268,7 @@ public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
                 PersonalCar personalCar = new PersonalCar();
                 personalCar.setCarId(resultSet.getLong("CarID"));
                 personalCar.setVehicleType(resultSet.getString("VehicleType"));
+                personalCar.setImage(resultSet.getString("Image"));
                 personalCar.setMake(resultSet.getString("Make"));
                 personalCar.setModel(resultSet.getString("Model"));
                 personalCar.setProductionYear(resultSet.getInt("ProductionYear"));
@@ -294,20 +301,21 @@ public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("update VEHICLES set VehicleType = ?, Make = ?, Model = ?, ProductionYear = ?, EngineCapacity = ?, FuelType = ?, FuelConsumption = ?, RentPrice = ?, IsAvailable = ?, LuxuryType = ?, NumberOfDoors = ?, BodyType = ? " +
+                    connection.prepareStatement("update VEHICLES set VehicleType = ?, Image = ?, Make = ?, Model = ?, ProductionYear = ?, EngineCapacity = ?, FuelType = ?, FuelConsumption = ?, RentPrice = ?, IsAvailable = ?, LuxuryType = ?, NumberOfDoors = ?, BodyType = ? " +
                             "where CarID = id", PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, personalCar.getVehicleType());
-            preparedStatement.setString(2, personalCar.getMake());
-            preparedStatement.setString(3, personalCar.getModel());
-            preparedStatement.setInt(4, personalCar.getProductionYear());
-            preparedStatement.setDouble(5, personalCar.getEngineCapacity());
-            preparedStatement.setString(6, personalCar.getFuelType());
-            preparedStatement.setDouble(7, personalCar.getFuelConsumption());
-            preparedStatement.setDouble(8, personalCar.getRentPrice());
-            preparedStatement.setBoolean(9, personalCar.isAvailable());
-            preparedStatement.setString(10, personalCar.getLuxuryType());
-            preparedStatement.setString(11, personalCar.getNumberOfDoors());
-            preparedStatement.setString(12, personalCar.getBodyType());
+            preparedStatement.setString(2, personalCar.getImage());
+            preparedStatement.setString(3, personalCar.getMake());
+            preparedStatement.setString(4, personalCar.getModel());
+            preparedStatement.setInt(5, personalCar.getProductionYear());
+            preparedStatement.setDouble(6, personalCar.getEngineCapacity());
+            preparedStatement.setString(7, personalCar.getFuelType());
+            preparedStatement.setDouble(8, personalCar.getFuelConsumption());
+            preparedStatement.setDouble(9, personalCar.getRentPrice());
+            preparedStatement.setBoolean(10, personalCar.isAvailable());
+            preparedStatement.setString(11, personalCar.getLuxuryType());
+            preparedStatement.setString(12, personalCar.getNumberOfDoors());
+            preparedStatement.setString(13, personalCar.getBodyType());
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
             System.out.println("Exception while execute PersonalCarDAOImpl.update()");
