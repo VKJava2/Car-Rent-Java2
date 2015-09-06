@@ -2,7 +2,7 @@ package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.MiniBusDAO;
-import lv.javaguru.java2.domain.Accessory;
+//import lv.javaguru.java2.domain.Accessory;
 import lv.javaguru.java2.domain.MiniBus;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +29,9 @@ public class MiniBusDAOImpl extends DAOImpl implements MiniBusDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("INSERT INTO VEHICLES VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+                    connection.prepareStatement("INSERT INTO VEHICLES (CarID, VehicleType, Image, Make, Model, ProductionYear, EngineCapacity," +
+                            "FuelType, FuelConsumption, RentPrice, IsAvailable, /*Accessories, */MiniBusSeats," +
+                            "CargoVolume, MiniBusColor) VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, miniBus.getVehicleType());
             preparedStatement.setString(2, miniBus.getImage());
             preparedStatement.setString(3, miniBus.getMake());
