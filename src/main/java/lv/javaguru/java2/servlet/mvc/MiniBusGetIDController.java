@@ -27,13 +27,13 @@ public class MiniBusGetIDController implements MVCController {
         try {
             MiniBus miniBus = miniBusDAO.getById(id);
 
-            if (!(miniBus.getCarId() == id)) {
+            if (miniBus.getCarId() == id) {
                 return new MVCModel(miniBus, "/vehicleById.jsp");
             } else {
                 return new MVCModel(null, "/noVehicleFound.jsp");
             }
         } catch (DBException e) {
-            return new MVCModel(null, "/carNotFound.jsp");
+            return new MVCModel(null, "/errorpage.jsp");
         }
     }
 }

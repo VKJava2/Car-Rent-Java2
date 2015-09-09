@@ -33,7 +33,7 @@ public class MiniBusDeleteController implements MVCController {
                 return new MVCModel(null, "/noVehicleFound.jsp");
             }
         } catch (DBException e) {
-            return new MVCModel(null, "/carNotFound.jsp");
+            return new MVCModel(null, "/errorpage.jsp");
         }
     }
 }

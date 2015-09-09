@@ -36,7 +36,13 @@ public class MVCFilter implements Filter {
         controllers.put("/minibuses", getBean(MiniBusGetIDController.class));
         controllers.put("/minibuses", getBean(MiniBusListAllController.class));
         controllers.put("/minibuses", getBean(MiniBusUpdateController.class));
-
+        controllers.put("/users", getBean(UserGetByEmailController.class));
+        controllers.put("/users", getBean(UserGetByFirstNameController.class));
+        controllers.put("/users", getBean(UserGetByIdController.class));
+        controllers.put("/users", getBean(UserGetByInitialsController.class));
+        controllers.put("/users", getBean(UserGetByLastNameController.class));
+        controllers.put("/users", getBean(UserGetByPhoneNrController.class));
+        controllers.put("/users", getBean(UserGetByUserNameController.class));
     }
 
     private MVCController getBean(Class clazz){

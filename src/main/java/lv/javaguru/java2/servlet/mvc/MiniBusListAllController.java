@@ -32,7 +32,7 @@ public class MiniBusListAllController implements MVCController {
                 return new MVCModel(null, "/noMiniBusAvailable.jsp");
             }
         } catch (DBException e) {
-            return new MVCModel(null, "/carNotFound.jsp");
+            return new MVCModel(null, "/errorpage.jsp");
         }
     }
 }
