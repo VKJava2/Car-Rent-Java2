@@ -15,7 +15,7 @@
 <body>
 
 <%
-  List<MiniBus> miniBuses = (List<MiniBus>)request.getAttribute("VehicleID");
+  List<MiniBus> miniBuses = (List<MiniBus>)request.getAttribute("model");
   if(miniBuses != null) {
 %>
 

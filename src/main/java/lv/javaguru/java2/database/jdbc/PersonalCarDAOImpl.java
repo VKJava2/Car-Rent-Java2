@@ -4,342 +4,75 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.PersonalCarDAO;
 import lv.javaguru.java2.domain.PersonalCar;
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
 
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public void create(PersonalCar personalCar) throws DBException {
-        if (personalCar == null) {
-            return;
-        }
-
-        Connection connection = null;
-
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement("insert into VEHICLES (CarID, VehicleType, Image, Make, Model, ProductionYear, EngineCapacity, " +
-                            "FuelType, FuelConsumption, RentPrice, IsAvailable, LuxuryType, NumberOfDoors, BodyType) " +
-                            "values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, personalCar.getVehicleType());
-            preparedStatement.setString(2, personalCar.getImage());
-            preparedStatement.setString(3, personalCar.getMake());
-            preparedStatement.setString(4, personalCar.getModel());
-            preparedStatement.setInt(5, personalCar.getProductionYear());
-            preparedStatement.setDouble(6, personalCar.getEngineCapacity());
-            preparedStatement.setString(7, personalCar.getFuelType());
-            preparedStatement.setDouble(8, personalCar.getFuelConsumption());
-            preparedStatement.setDouble(9, personalCar.getRentPrice());
-            preparedStatement.setBoolean(10, personalCar.isAvailable());
-            preparedStatement.setString(11, personalCar.getLuxuryType());
-            preparedStatement.setString(12, personalCar.getNumberOfDoors());
-            preparedStatement.setString(13, personalCar.getBodyType());
-
-            preparedStatement.executeUpdate();
-            ResultSet rs = preparedStatement.getGeneratedKeys();
-            if (rs.next()) {
-                personalCar.setCarId(rs.getLong(1));
-            }
-        } catch (Throwable e) {
-            System.out.println("Exception while execute PersonalCarDAOImpl.create()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+        sessionFactory.getCurrentSession().save(personalCar);
 
     }
 
     public PersonalCar getById(String carID) throws DBException {
-        Connection connection = null;
-
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from VEHICLES where CarID = ?");
-            preparedStatement.setString(1, carID);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            PersonalCar personalCar = null;
-            if (resultSet.next()) {
-                personalCar = new PersonalCar();
-                personalCar.setCarId(resultSet.getLong("CarID"));
-                personalCar.setVehicleType(resultSet.getString("VehicleType"));
-                personalCar.setImage(resultSet.getString("Image"));
-                personalCar.setMake(resultSet.getString("Make"));
-                personalCar.setModel(resultSet.getString("Model"));
-                personalCar.setProductionYear(resultSet.getInt("ProductionYear"));
-                personalCar.setEngineCapacity(resultSet.getDouble("EngineCapacity"));
-                personalCar.setFuelType(resultSet.getString("FuelType"));
-                personalCar.setFuelConsumption(resultSet.getDouble("FuelConsumption"));
-                personalCar.setRentPrice(resultSet.getDouble("RentPrice"));
-                personalCar.setIsAvailable(resultSet.getBoolean("IsAvailable"));
-                personalCar.setLuxuryType(resultSet.getString("LuxuryType"));
-                personalCar.setNumberOfDoors(resultSet.getString("NumberOfDoors"));
-                personalCar.setBodyType(resultSet.getString("BodyType"));
-            }
-            return personalCar;
-        } catch (Throwable e) {
-            System.out.println("Exception while execute PersonalCarDAOImpl.getById()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+        PersonalCar personalCar;
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PersonalCar.class);
+        criteria.add(Restrictions.eq("carId", carID));
+        return personalCar = (PersonalCar) criteria.uniqueResult();
     }
 
     public List<PersonalCar> getByMake(String manufacturer) throws DBException {
-        Connection connection = null;
-
-        List<PersonalCar> foundCars = new ArrayList<PersonalCar>();
-
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from VEHICLES where Make = ? and VehicleType = ?");
-            preparedStatement.setString(1, manufacturer);
-            preparedStatement.setString(2, "PersonalCar");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                PersonalCar personalCar = new PersonalCar();
-                personalCar.setCarId(resultSet.getLong("CarID"));
-                personalCar.setVehicleType(resultSet.getString("VehicleType"));
-                personalCar.setImage(resultSet.getString("Image"));
-                personalCar.setMake(resultSet.getString("Make"));
-                personalCar.setModel(resultSet.getString("Model"));
-                personalCar.setProductionYear(resultSet.getInt("ProductionYear"));
-                personalCar.setEngineCapacity(resultSet.getDouble("EngineCapacity"));
-                personalCar.setFuelType(resultSet.getString("FuelType"));
-                personalCar.setFuelConsumption(resultSet.getDouble("FuelConsumption"));
-                personalCar.setRentPrice(resultSet.getDouble("RentPrice"));
-                personalCar.setIsAvailable(resultSet.getBoolean("IsAvailable"));
-                personalCar.setLuxuryType(resultSet.getString("LuxuryType"));
-                personalCar.setNumberOfDoors(resultSet.getString("NumberOfDoors"));
-                personalCar.setBodyType(resultSet.getString("BodyType"));
-                foundCars.add(personalCar);
-            }
-            return foundCars;
-        } catch (Throwable e) {
-            System.out.println("Exception while execute PersonalCarDAOImpl.getByMake()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+        List<PersonalCar> personalCars = new ArrayList<PersonalCar>();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PersonalCar.class);
+        criteria.add(Restrictions.eq("vehicleType", "PersonalCar"));
+        criteria.add(Restrictions.eq("make", manufacturer));
+        return personalCars = (List<PersonalCar>) criteria.list();
     }
 
     public List<PersonalCar> getByLuxuryType(String luxuryType) throws DBException {
-        Connection connection = null;
-
-        List<PersonalCar> foundCars = new ArrayList<PersonalCar>();
-
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from VEHICLES where LuxuryType = ?");
-            preparedStatement.setString(1, luxuryType);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                PersonalCar personalCar = new PersonalCar();
-                personalCar.setCarId(resultSet.getLong("CarID"));
-                personalCar.setVehicleType(resultSet.getString("VehicleType"));
-                personalCar.setImage(resultSet.getString("Image"));
-                personalCar.setMake(resultSet.getString("Make"));
-                personalCar.setModel(resultSet.getString("Model"));
-                personalCar.setProductionYear(resultSet.getInt("ProductionYear"));
-                personalCar.setEngineCapacity(resultSet.getDouble("EngineCapacity"));
-                personalCar.setFuelType(resultSet.getString("FuelType"));
-                personalCar.setFuelConsumption(resultSet.getDouble("FuelConsumption"));
-                personalCar.setRentPrice(resultSet.getDouble("RentPrice"));
-                personalCar.setIsAvailable(resultSet.getBoolean("IsAvailable"));
-                personalCar.setLuxuryType(resultSet.getString("LuxuryType"));
-                personalCar.setNumberOfDoors(resultSet.getString("NumberOfDoors"));
-                personalCar.setBodyType(resultSet.getString("BodyType"));
-                foundCars.add(personalCar);
-            }
-            return foundCars;
-        } catch (Throwable e) {
-            System.out.println("Exception while execute PersonalCarDAOImpl.getByLuxuryType()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+        List<PersonalCar> personalCars = new ArrayList<PersonalCar>();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PersonalCar.class);
+        criteria.add(Restrictions.eq("luxuryType", luxuryType));
+        return personalCars = (List<PersonalCar>) criteria.list();
     }
 
     public List<PersonalCar> getByBodyType(String bodyType) throws DBException {
-        Connection connection = null;
-
-        List<PersonalCar> foundCars = new ArrayList<PersonalCar>();
-
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from VEHICLES where BodyType = ?");
-            preparedStatement.setString(1, bodyType);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                PersonalCar personalCar = new PersonalCar();
-                personalCar.setCarId(resultSet.getLong("CarID"));
-                personalCar.setVehicleType(resultSet.getString("VehicleType"));
-                personalCar.setImage(resultSet.getString("Image"));
-                personalCar.setMake(resultSet.getString("Make"));
-                personalCar.setModel(resultSet.getString("Model"));
-                personalCar.setProductionYear(resultSet.getInt("ProductionYear"));
-                personalCar.setEngineCapacity(resultSet.getDouble("EngineCapacity"));
-                personalCar.setFuelType(resultSet.getString("FuelType"));
-                personalCar.setFuelConsumption(resultSet.getDouble("FuelConsumption"));
-                personalCar.setRentPrice(resultSet.getDouble("RentPrice"));
-                personalCar.setIsAvailable(resultSet.getBoolean("IsAvailable"));
-                personalCar.setLuxuryType(resultSet.getString("LuxuryType"));
-                personalCar.setNumberOfDoors(resultSet.getString("NumberOfDoors"));
-                personalCar.setBodyType(resultSet.getString("BodyType"));
-                foundCars.add(personalCar);
-            }
-            return foundCars;
-        } catch (Throwable e) {
-            System.out.println("Exception while execute PersonalCarDAOImpl.getByBodyType()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+        List<PersonalCar> personalCars = new ArrayList<PersonalCar>();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PersonalCar.class);
+        criteria.add(Restrictions.eq("bodyType", bodyType));
+        return personalCars = (List<PersonalCar>) criteria.list();
     }
 
-    public List<PersonalCar> getByFuelType(String fuelType ) throws DBException {
-        Connection connection = null;
-
-        List<PersonalCar> foundCars = new ArrayList<PersonalCar>();
-
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from VEHICLES where FuelType = ?  and VehicleType = ?");
-            preparedStatement.setString(1, fuelType);
-            preparedStatement.setString(2, "PersonalCar");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                PersonalCar personalCar = new PersonalCar();
-                personalCar.setCarId(resultSet.getLong("CarID"));
-                personalCar.setVehicleType(resultSet.getString("VehicleType"));
-                personalCar.setImage(resultSet.getString("Image"));
-                personalCar.setMake(resultSet.getString("Make"));
-                personalCar.setModel(resultSet.getString("Model"));
-                personalCar.setProductionYear(resultSet.getInt("ProductionYear"));
-                personalCar.setEngineCapacity(resultSet.getDouble("EngineCapacity"));
-                personalCar.setFuelType(resultSet.getString("FuelType"));
-                personalCar.setFuelConsumption(resultSet.getDouble("FuelConsumption"));
-                personalCar.setRentPrice(resultSet.getDouble("RentPrice"));
-                personalCar.setIsAvailable(resultSet.getBoolean("IsAvailable"));
-                personalCar.setLuxuryType(resultSet.getString("LuxuryType"));
-                personalCar.setNumberOfDoors(resultSet.getString("NumberOfDoors"));
-                personalCar.setBodyType(resultSet.getString("BodyType"));
-                foundCars.add(personalCar);
-            }
-            return foundCars;
-        } catch (Throwable e) {
-            System.out.println("Exception while execute PersonalCarDAOImpl.getByFuelType()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+    public List<PersonalCar> getByFuelType(String fuelType) throws DBException {
+        List<PersonalCar> personalCars = new ArrayList<PersonalCar>();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PersonalCar.class);
+        criteria.add(Restrictions.eq("vehicleType", "PersonalCar"));
+        criteria.add(Restrictions.eq("fuelType", fuelType));
+        return personalCars = (List<PersonalCar>) criteria.list();
     }
 
     public List<PersonalCar> getAll() throws DBException {
-        Connection connection = null;
-
-        List<PersonalCar> foundCars = new ArrayList<PersonalCar>();
-
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from VEHICLES where VehicleType = ?");
-            preparedStatement.setString(1, "PersonalCar");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                PersonalCar personalCar = new PersonalCar();
-                personalCar.setCarId(resultSet.getLong("CarID"));
-                personalCar.setVehicleType(resultSet.getString("VehicleType"));
-                personalCar.setImage(resultSet.getString("Image"));
-                personalCar.setMake(resultSet.getString("Make"));
-                personalCar.setModel(resultSet.getString("Model"));
-                personalCar.setProductionYear(resultSet.getInt("ProductionYear"));
-                personalCar.setEngineCapacity(resultSet.getDouble("EngineCapacity"));
-                personalCar.setFuelType(resultSet.getString("FuelType"));
-                personalCar.setFuelConsumption(resultSet.getDouble("FuelConsumption"));
-                personalCar.setRentPrice(resultSet.getDouble("RentPrice"));
-                personalCar.setIsAvailable(resultSet.getBoolean("IsAvailable"));
-                personalCar.setLuxuryType(resultSet.getString("LuxuryType"));
-                personalCar.setNumberOfDoors(resultSet.getString("NumberOfDoors"));
-                personalCar.setBodyType(resultSet.getString("BodyType"));
-                foundCars.add(personalCar);
-            }
-            return foundCars;
-        } catch (Throwable e) {
-            System.out.println("Exception while execute PersonalCarDAOImpl.getByMake()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
-    }
-
-    public void update(PersonalCar personalCar, Long id) throws DBException {
-        if (personalCar == null) {
-            return;
-        }
-
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement("update VEHICLES set VehicleType = ?, Image = ?, Make = ?, Model = ?, ProductionYear = ?, EngineCapacity = ?, FuelType = ?, FuelConsumption = ?, RentPrice = ?, IsAvailable = ?, LuxuryType = ?, NumberOfDoors = ?, BodyType = ? " +
-                            "where CarID = id", PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, personalCar.getVehicleType());
-            preparedStatement.setString(2, personalCar.getImage());
-            preparedStatement.setString(3, personalCar.getMake());
-            preparedStatement.setString(4, personalCar.getModel());
-            preparedStatement.setInt(5, personalCar.getProductionYear());
-            preparedStatement.setDouble(6, personalCar.getEngineCapacity());
-            preparedStatement.setString(7, personalCar.getFuelType());
-            preparedStatement.setDouble(8, personalCar.getFuelConsumption());
-            preparedStatement.setDouble(9, personalCar.getRentPrice());
-            preparedStatement.setBoolean(10, personalCar.isAvailable());
-            preparedStatement.setString(11, personalCar.getLuxuryType());
-            preparedStatement.setString(12, personalCar.getNumberOfDoors());
-            preparedStatement.setString(13, personalCar.getBodyType());
-            preparedStatement.executeUpdate();
-        } catch (Throwable e) {
-            System.out.println("Exception while execute PersonalCarDAOImpl.update()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+        List<PersonalCar> personalCars = new ArrayList<PersonalCar>();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PersonalCar.class);
+        criteria.add(Restrictions.eq("vehicleType", "PersonalCar"));
+        return personalCars = (List<PersonalCar>) criteria.list();
     }
 
     public void delete(Long id) throws DBException {
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("delete from VEHICLES where CarID = ?");
-            preparedStatement.setLong(1, id);
-            preparedStatement.executeUpdate();
-        } catch (Throwable e) {
-            System.out.println("Exception while execute PersonalCarDAOImpl.delete()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+        PersonalCar personalCar;
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PersonalCar.class);
+        criteria.add(Restrictions.eq("carId", id));
+        personalCar = (PersonalCar) criteria.uniqueResult();
+        sessionFactory.getCurrentSession().delete(personalCar);
     }
 }

@@ -10,12 +10,7 @@ import java.util.List;
 public interface MiniBusDAO {
 
     void create(MiniBus miniBus) throws DBException;
-
-    MiniBus getById(Long id) throws DBException;
-
+    MiniBus getById(String id) throws DBException;
     void delete(Long id) throws DBException;
-
-    void update(MiniBus miniBus) throws DBException;
-
     List<MiniBus> getAll() throws DBException;
 }

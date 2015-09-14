@@ -1,10 +1,21 @@
 package lv.javaguru.java2.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import java.io.Serializable;
 
-public class PersonalCar extends Vehicle {
+@Entity
+@Table(name = "personalCar")
+@PrimaryKeyJoinColumn(name="CarID")
+public class PersonalCar extends Vehicle implements Serializable {
 
+    @Column(name="LuxuryType")
     private String luxuryType;
+    @Column(name="NumberOfDoors")
     private String numberOfDoors;
+    @Column(name="BodyType")
     private String bodyType;
 
 

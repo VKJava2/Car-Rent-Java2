@@ -92,9 +92,9 @@
                     <!-- ============================== MAIN CONTENT BOX START ======================================= -->
 
                     <div class="panel">
-                        <a href="./motorsycles" target="_self" alt="Rent a Bike"><img src="images/bikes.jpg" class="img-responsive" height="auto" width="auto" alt="Rent a Bike"></a>
+                        <a href="./motorcycles" target="_self" alt="Rent a Bike"><img src="images/bikes.jpg" class="img-responsive" height="auto" width="auto" alt="Rent a Bike"></a>
                         <div class="caption text-center">
-                            <a href="./motorsycles" target="_self" alt="Rent a Bike"><h3>Bikes</h3></a>
+                            <a href="./motorcycles" target="_self" alt="Rent a Bike"><h3>Bikes</h3></a>
                             <p class="text-justify">
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                             </p>
@@ -115,9 +115,9 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
                     <div class="panel">
-                        <a href="./car_list.php?c_type=passenger" target="_self" alt="Rent a Passenger vehicle"><img src="images/passenger.jpg" class="img-responsive" height="auto" width="auto" alt="Rent a Passenger vehicle"></a>
+                        <a href="./minibuses" target="_self" alt="Rent a Passenger vehicle"><img src="images/passenger.jpg" class="img-responsive" height="auto" width="auto" alt="Rent a Passenger vehicle"></a>
                         <div class="caption text-center">
-                            <a href="./car_list.php?c_type=passenger" target="_self" alt="Rent a Passenger vehicle"><h3>Passenger vehicles</h3></a>
+                            <a href="./minibuses" target="_self" alt="Rent a Passenger vehicle"><h3>Passenger vehicles</h3></a>
                             <p class="text-justify">
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                             </p>

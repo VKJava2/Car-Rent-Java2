@@ -1,24 +1,45 @@
 package lv.javaguru.java2.domain;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by VK on 2015.07.26..
  */
-public abstract class Vehicle {
 
+@Entity
+@Table(name = "vehicles")
+@Inheritance(strategy=InheritanceType.JOINED)
+public abstract class Vehicle implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="CarID")
     private long carId;
+    @Column(name="VehicleType")
     private String vehicleType;
+    @Column(name="Image")
     private String image;
+    @Column(name="Make")
     private String make;
+    @Column(name="Model")
     private String model;
+    @Column(name="ProductionYear")
     private int productionYear;
+    @Column(name="EngineCapacity")
     private double engineCapacity;
+    @Column(name="FuelType")
     private String fuelType;
+    @Column(name="FuelConsumption")
     private double fuelConsumption;
+    @Column(name="RentPrice")
     private double rentPrice;
+    @Column(name="IsAvailable")
     private boolean isAvailable;
-    private List<Accessory> accessories;
+//    @OneToMany(mappedBy = "vehicle", fetch=FetchType.EAGER)
+//    private List<Accessory> accessories;
 
     public long getCarId() {
         return carId;
@@ -108,11 +129,11 @@ public abstract class Vehicle {
         this.isAvailable = isAvailable;
     }
 
-    public List<Accessory> getAccessories() {
+/*    public List<Accessory> getAccessories() {
         return accessories;
     }
 
     public void setAccessories(List<Accessory> accessories) {
         this.accessories = accessories;
-    }
+    }   */
 }

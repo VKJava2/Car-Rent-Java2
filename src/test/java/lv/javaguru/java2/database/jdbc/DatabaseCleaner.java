@@ -18,6 +18,7 @@ public class DatabaseCleaner extends DAOImpl {
         tableNames.add("USERS");
         tableNames.add("CARS");
         tableNames.add("VEHICLES");
+        tableNames.add("MOTORCYCLES");
         return tableNames;
     }
 

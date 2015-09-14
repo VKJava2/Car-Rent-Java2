@@ -22,7 +22,5 @@ public interface PersonalCarDAO {
 
     void delete(Long id) throws DBException;
 
-    void update(PersonalCar personalCar, Long carId) throws DBException;
-
     List<PersonalCar> getAll() throws DBException;
 }

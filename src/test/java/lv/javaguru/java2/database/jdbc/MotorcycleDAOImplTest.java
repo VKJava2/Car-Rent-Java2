@@ -33,8 +33,8 @@ public class MotorcycleDAOImplTest {
 
     @Test
     public void testCreate() throws DBException {
-        Motorcycle motorcycle = createMotorcycle("Motorcycle", "Honda", "CB600F Hornet", 2007, 0.6, "Бензин", 6, 60, true, "4-тактный", "Цепь", "Street");
-        Motorcycle motorcycle2 = createMotorcycle("Car", "Honda", "CB600F Hornet", 2007, 0.6, "Бензин", 6, 60, true, "4-тактный", "Цепь", "Street");
+        Motorcycle motorcycle = createMotorcycle("Motorcycle", "toyota_rav4_2014.jpg", "Honda", "CB600F Hornet", 2007, 0.6, "Бензин", 6, 60, true, "4-тактный", "Цепь", "Street");
+        Motorcycle motorcycle2 = createMotorcycle("Car", "toyota_rav4_2014.jpg", "Honda", "CB600F Hornet", 2007, 0.6, "Бензин", 6, 60, true, "4-тактный", "Цепь", "Street");
 
         motorcycleDAOImpl.create(motorcycle);
         motorcycleDAOImpl.create(motorcycle2);
@@ -43,6 +43,7 @@ public class MotorcycleDAOImplTest {
         assertNotNull(motorcycleFromDB);
         assertEquals(motorcycle.getCarId(), motorcycleFromDB.getCarId());
         assertEquals(motorcycle.getVehicleType(), motorcycleFromDB.getVehicleType());
+        assertEquals(motorcycle.getImage(), motorcycleFromDB.getImage());
         assertEquals(motorcycle.getMake(), motorcycleFromDB.getMake());
         assertEquals(motorcycle.getModel(), motorcycleFromDB.getModel());
         assertEquals(motorcycle.getProductionYear(), motorcycleFromDB.getProductionYear());
@@ -58,9 +59,9 @@ public class MotorcycleDAOImplTest {
 
     @Test
     public void testMultipleCarCreation() throws DBException {
-        Motorcycle motorcycle = createMotorcycle("Motorcycle", "Honda", "CB600F Hornet", 2007, 0.6, "Бензин", 6, 60, true, "4-тактный", "Цепь", "Street");
-        Motorcycle motorcycle2 = createMotorcycle("Car", "Honda", "CB600F Hornet", 2007, 0.6, "Бензин", 6, 60, true, "4-тактный", "Цепь", "Street");
-        Motorcycle motorcycle3 = createMotorcycle("Motorcycle", "Suzuki", "SV", 2006, 0.6, "Бензин", 5.5, 50, true, "2-тактный", "Цепь", "Street");
+        Motorcycle motorcycle = createMotorcycle("Motorcycle", "toyota_rav4_2014.jpg", "Honda", "CB600F Hornet", 2007, 0.6, "Бензин", 6, 60, true, "4-тактный", "Цепь", "Street");
+        Motorcycle motorcycle2 = createMotorcycle("Car", "toyota_rav4_2014.jpg", "Honda", "CB600F Hornet", 2007, 0.6, "Бензин", 6, 60, true, "4-тактный", "Цепь", "Street");
+        Motorcycle motorcycle3 = createMotorcycle("Motorcycle", "toyota_rav4_2014.jpg", "Suzuki", "SV", 2006, 0.6, "Бензин", 5.5, 50, true, "2-тактный", "Цепь", "Street");
         motorcycleDAOImpl.create(motorcycle);
         motorcycleDAOImpl.create(motorcycle2);
         motorcycleDAOImpl.create(motorcycle3);
@@ -68,10 +69,11 @@ public class MotorcycleDAOImplTest {
         assertEquals(2, motorcycles.size());
     }
 
-    private Motorcycle createMotorcycle(String vehicleType, String make, String model, int productionYear, double engineCapacity, String fuelType, double fuelConsumption,
+    private Motorcycle createMotorcycle(String vehicleType, String image, String make, String model, int productionYear, double engineCapacity, String fuelType, double fuelConsumption,
                                         double rentPrice, boolean isAvailable, String engineTypeByStrokes, String driveType, String motorcycleType) {
         Motorcycle motorcycle = new Motorcycle();
         motorcycle.setVehicleType(vehicleType);
+        motorcycle.setImage(image);
         motorcycle.setMake(make);
         motorcycle.setModel(model);
         motorcycle.setProductionYear(productionYear);

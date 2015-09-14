@@ -2,9 +2,6 @@ package lv.javaguru.java2.database.jdbc;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
-import lv.javaguru.java2.database.CarDAO;
 import lv.javaguru.java2.domain.Car;
 import org.junit.Before;
 import org.junit.Test;

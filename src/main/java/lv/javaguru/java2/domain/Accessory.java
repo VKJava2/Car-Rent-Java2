@@ -1,16 +1,29 @@
 package lv.javaguru.java2.domain;
 
+import javax.persistence.*;
+
 /**
  * Created by VK on 2015.07.26..
  */
+
+@Entity
+@Table(name = "accessories")
 public class Accessory {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="AccessoryID")
     private long accessoryId;
+    @Column(name="Accessory")
     private String accessory;
+    @Column(name="RentPrice")
     private double rentPrice;
-    private boolean isAvailableForMotorcycles;
-    private boolean isAvailableForPersonalVehicles;
-    private boolean isAvailableForPassengerVehicles;
+    @Column(name="AvailableFor")
+    private String availableFor;
+//    @ManyToOne
+ //   @JoinColumn(name="AvailableFor", referencedColumnName = "VehicleType")
+//    @JoinColumn(name="AvailableFor")
+ //   private Vehicle vehicle;
 
     public long getAccessoryId() {
         return accessoryId;
@@ -36,27 +49,11 @@ public class Accessory {
         this.rentPrice = rentPrice;
     }
 
-    public boolean isAvailableForMotorcycles() {
-        return isAvailableForMotorcycles;
+    public String getAvailableFor() {
+        return availableFor;
     }
 
-    public void setIsAvailableForMotorcycles(boolean isAvailableForMotorcycles) {
-        this.isAvailableForMotorcycles = isAvailableForMotorcycles;
-    }
-
-    public boolean isAvailableForPersonalVehicles() {
-        return isAvailableForPersonalVehicles;
-    }
-
-    public void setIsAvailableForPersonalVehicles(boolean isAvailableForPersonalVehicles) {
-        this.isAvailableForPersonalVehicles = isAvailableForPersonalVehicles;
-    }
-
-    public boolean isAvailableForPassengerVehicles() {
-        return isAvailableForPassengerVehicles;
-    }
-
-    public void setIsAvailableForPassengerVehicles(boolean isAvailableForPassengerVehicles) {
-        this.isAvailableForPassengerVehicles = isAvailableForPassengerVehicles;
+    public void setAvailableFor(String availableFor) {
+        this.availableFor = availableFor;
     }
 }
