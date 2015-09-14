@@ -1,7 +1,7 @@
 /*package lv.javaguru.java2.servlet.mvc;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.MiniBusDAO;
+import lv.javaguru.java2.database.jdbc.MiniBusDAOImpl;
 import lv.javaguru.java2.domain.MiniBus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 public class MiniBusUpdateController implements MVCController {
 
     @Autowired
-    private MiniBusDAO miniBusDAO;
+    private MiniBusDAOImpl miniBusDAO;
 
     public MVCModel processRequest(HttpServletRequest req) {
 
@@ -29,7 +29,7 @@ public class MiniBusUpdateController implements MVCController {
                 return new MVCModel(null, "/noVehicleFound.jsp");
             }
         } catch (DBException e) {
-            return new MVCModel(null, "/carNotFound.jsp");
+            return new MVCModel(null, "/errorpage.jsp");
         }
     }
 } */

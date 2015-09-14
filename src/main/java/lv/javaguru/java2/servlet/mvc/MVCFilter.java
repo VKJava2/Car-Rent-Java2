@@ -29,12 +29,20 @@ public class MVCFilter implements Filter {
             logger.log(Level.INFO, "Spring context failed to start", e);
         }
 
-//        controllers.put("/cars", getBean(CarController.class));
+        controllers.put("/cars", getBean(CarController.class));
         controllers.put("/personalcars", getBean(PersonalCarController.class));
         controllers.put("/motorcycles", getBean(MotorcycleController.class));
-        controllers.put("/minibuses", getBean(MiniBusController.class));
-        controllers.put("/preOrder", getBean(PreOrderController.class));
-        controllers.put("/order", getBean(OrderController.class));
+        controllers.put("/minibuses", getBean(MiniBusDeleteController.class));
+        controllers.put("/minibuses", getBean(MiniBusGetIDController.class));
+        controllers.put("/minibuses", getBean(MiniBusListAllController.class));
+        controllers.put("/minibuses", getBean(MiniBusUpdateController.class));
+        controllers.put("/users", getBean(UserGetByEmailController.class));
+        controllers.put("/users", getBean(UserGetByFirstNameController.class));
+        controllers.put("/users", getBean(UserGetByIdController.class));
+        controllers.put("/users", getBean(UserGetByInitialsController.class));
+        controllers.put("/users", getBean(UserGetByLastNameController.class));
+        controllers.put("/users", getBean(UserGetByPhoneNrController.class));
+        controllers.put("/users", getBean(UserGetByUserNameController.class));
     }
 
     private MVCController getBean(Class clazz){

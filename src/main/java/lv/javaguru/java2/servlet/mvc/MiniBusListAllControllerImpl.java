@@ -1,7 +1,7 @@
 package lv.javaguru.java2.servlet.mvc;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.MiniBusDAO;
+import lv.javaguru.java2.database.jdbc.MiniBusDAOImpl;
 import lv.javaguru.java2.domain.MiniBus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import java.util.List;
 public class MiniBusListAllControllerImpl implements MiniBusController {
 
     @Autowired
-    private MiniBusDAO miniBusDAO;
+    private MiniBusDAOImpl miniBusDAO;
 
     @Transactional
     public MVCModel processRequest(HttpServletRequest req) {
@@ -31,7 +31,7 @@ public class MiniBusListAllControllerImpl implements MiniBusController {
                 return new MVCModel(null, "/noMiniBusAvailable.jsp");
             }
         } catch (DBException e) {
-            return new MVCModel(null, "/carNotFound.jsp");
+            return new MVCModel(null, "/errorpage.jsp");
         }
     }
 }

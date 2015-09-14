@@ -1,13 +1,18 @@
 package lv.javaguru.java2.domain;
 
 /**
- * Created by Viktor on 01/07/2014.
+ * Created by XidenT on 06/09/2015.
  */
 public class User {
 
     private long userId;
     private String firstName;
     private String lastName;
+    private String userName;
+    private String password;
+    private String phoneNr;
+    private String email;
+    private String bankAccNr;
 
 
     public long getUserId() {
@@ -32,5 +37,45 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhoneNr() {
+        return phoneNr;
+    }
+
+    public void setPhoneNr(String phoneNr) {
+        this.phoneNr = phoneNr;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getBankAccNr() {
+        return bankAccNr;
+    }
+
+    public void setBankAccNr(String bankAccNr) {
+        this.bankAccNr = bankAccNr;
     }
 }
