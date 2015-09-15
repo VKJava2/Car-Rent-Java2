@@ -78,7 +78,7 @@ public class PersonalCarDAOImplTest {
     public void testGetAll() throws DBException {
         PersonalCar personalCar = createPersonalCar("PersonalCar", "Mercedes Benz", "mercedes_c200_2014.jpg", "190", 1981, 1.9, "Diesel", 8.5, 25, true, "Economy", "5", "Sedan");
         PersonalCar personalCar2 = createPersonalCar("PersonalCar", "Toyota", "mercedes_c200_2012.jpg", "Carola", 1985, 1.6, "Petrol", 7.5, 25, true, "Economy", "5", "Hatchback");
-        PersonalCar personalCarFake = createPersonalCar("Car", "Honda", "mercedes_c200_2011.jpg", "Civic", 2007, 0.6, "Petrol", 6, 60, true, "Urban", "3", "Sedan");
+        PersonalCar personalCarFake = createPersonalCar("Motorcycle", "Honda", "mercedes_c200_2011.jpg", "Civic", 2007, 0.6, "Petrol", 6, 60, true, "Urban", "3", "Sedan");
         personalCarDAOImpl.create(personalCar);
         personalCarDAOImpl.create(personalCar2);
 

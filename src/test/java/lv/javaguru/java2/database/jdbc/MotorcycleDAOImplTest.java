@@ -34,12 +34,12 @@ public class MotorcycleDAOImplTest {
     @Test
     public void testCreate() throws DBException {
         Motorcycle motorcycle = createMotorcycle("Motorcycle", "toyota_rav4_2014.jpg", "Honda", "CB600F Hornet", 2007, 0.6, "Бензин", 6, 60, true, "4-тактный", "Цепь", "Street");
-        Motorcycle motorcycle2 = createMotorcycle("Car", "toyota_rav4_2014.jpg", "Honda", "CB600F Hornet", 2007, 0.6, "Бензин", 6, 60, true, "4-тактный", "Цепь", "Street");
+        Motorcycle motorcycle2 = createMotorcycle("Motorcycle", "toyota_rav4_2014.jpg", "Honda", "CB600F Hornet", 2007, 0.6, "Бензин", 6, 60, true, "4-тактный", "Цепь", "Street");
 
         motorcycleDAOImpl.create(motorcycle);
         motorcycleDAOImpl.create(motorcycle2);
 
-        Motorcycle motorcycleFromDB = motorcycleDAOImpl.getByMake(motorcycle.getMake());
+        Motorcycle motorcycleFromDB = motorcycleDAOImpl.getById(String.valueOf(motorcycle.getCarId()));
         assertNotNull(motorcycleFromDB);
         assertEquals(motorcycle.getCarId(), motorcycleFromDB.getCarId());
         assertEquals(motorcycle.getVehicleType(), motorcycleFromDB.getVehicleType());
@@ -60,7 +60,7 @@ public class MotorcycleDAOImplTest {
     @Test
     public void testMultipleCarCreation() throws DBException {
         Motorcycle motorcycle = createMotorcycle("Motorcycle", "toyota_rav4_2014.jpg", "Honda", "CB600F Hornet", 2007, 0.6, "Бензин", 6, 60, true, "4-тактный", "Цепь", "Street");
-        Motorcycle motorcycle2 = createMotorcycle("Car", "toyota_rav4_2014.jpg", "Honda", "CB600F Hornet", 2007, 0.6, "Бензин", 6, 60, true, "4-тактный", "Цепь", "Street");
+        Motorcycle motorcycle2 = createMotorcycle("Motorcycle", "toyota_rav4_2014.jpg", "Honda", "CB600F Hornet", 2007, 0.6, "Бензин", 6, 60, true, "4-тактный", "Цепь", "Street");
         Motorcycle motorcycle3 = createMotorcycle("Motorcycle", "toyota_rav4_2014.jpg", "Suzuki", "SV", 2006, 0.6, "Бензин", 5.5, 50, true, "2-тактный", "Цепь", "Street");
         motorcycleDAOImpl.create(motorcycle);
         motorcycleDAOImpl.create(motorcycle2);

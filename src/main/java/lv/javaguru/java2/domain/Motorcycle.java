@@ -10,7 +10,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "motorcycles")
 @PrimaryKeyJoinColumn(name="CarID")
-
 public class Motorcycle extends Vehicle implements Serializable {
 
     @Column(name="EngineTypeByStrokes")

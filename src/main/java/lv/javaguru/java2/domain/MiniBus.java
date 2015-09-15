@@ -1,12 +1,25 @@
 package lv.javaguru.java2.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import java.io.Serializable;
+
 /**
  * Created by XidenT on 28/07/2015.
  */
-public class MiniBus extends Vehicle {
 
+@Entity
+@Table(name = "miniBus")
+@PrimaryKeyJoinColumn(name="CarID")
+public class MiniBus extends Vehicle implements Serializable {
+
+    @Column(name="MiniBusSeats")
     private int seatNumber;
+    @Column(name="CargoVolume")
     private double cargoVolume;
+    @Column(name="MiniBusColor")
     private String miniBusColor;
 
     public int getSeatNumber() {

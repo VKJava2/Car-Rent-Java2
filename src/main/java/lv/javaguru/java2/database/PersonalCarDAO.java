@@ -1,9 +1,7 @@
 package lv.javaguru.java2.database;
 
-
 import lv.javaguru.java2.domain.PersonalCar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface PersonalCarDAO {
