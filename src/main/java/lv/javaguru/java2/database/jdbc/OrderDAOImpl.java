@@ -9,6 +9,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by VK on 2015.07.22..
  */
@@ -31,5 +34,16 @@ public class OrderDAOImpl extends DAOImpl implements OrderDAO {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Order.class);
         criteria.add(Restrictions.eq("orderId", orderId));
         return order = (Order) criteria.uniqueResult();
+    }
+
+    public List<Order> getAll() throws DBException {
+        List<Order> orders = new ArrayList<Order>();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Order.class);
+        return orders = (List<Order>) criteria.list();
+    }
+
+    public void delete(Order order) throws DBException {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Order.class);
+        sessionFactory.getCurrentSession().delete(order);
     }
 }

@@ -2,6 +2,7 @@ package lv.javaguru.java2.servlet.mvc;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.PersonalCarDAOImpl;
+import lv.javaguru.java2.domain.OrderTableCleaner;
 import lv.javaguru.java2.domain.PersonalCar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,10 +17,17 @@ public class PersonalCarControllerImpl implements PersonalCarController {
     @Autowired
     private PersonalCarDAOImpl personalCarDAO;
 
+    @Autowired
+    private OrderTableCleaner orderTableCleaner;
+
     @Transactional
     public MVCModel processRequest(HttpServletRequest req) {
 
             try {
+
+                String className = this.getClass().getSimpleName();
+                orderTableCleaner.cleanOrders(className);
+
                 List<PersonalCar> personalCarList = personalCarDAO.getAll();
 
                 if (!personalCarList.isEmpty()) {

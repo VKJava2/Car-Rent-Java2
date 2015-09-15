@@ -3,6 +3,7 @@ package lv.javaguru.java2.servlet.mvc;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.MotorcycleDAOImpl;
 import lv.javaguru.java2.domain.Motorcycle;
+import lv.javaguru.java2.domain.OrderTableCleaner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,10 +17,16 @@ public class MotorcycleControllerImpl implements MotorcycleController {
     @Autowired
     private MotorcycleDAOImpl motorcycleDAO;
 
+    @Autowired
+    private OrderTableCleaner orderTableCleaner;
+
     @Transactional
     public MVCModel processRequest(HttpServletRequest req) {
 
         try {
+            String className = this.getClass().getSimpleName();
+            orderTableCleaner.cleanOrders(className);
+
             List<Motorcycle> motorcycles = motorcycleDAO.getAll();
 
             if (!motorcycles.isEmpty()) {

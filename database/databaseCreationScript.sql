@@ -165,6 +165,7 @@ CREATE TABLE IF NOT EXISTS `car_rent`.`orders` (
   `RentAmount` double(6,2) NOT NULL,
   `AccessoriesTotal` double(6,2) NOT NULL,
   `GrandTotal` double(6,2) NOT NULL,
+  `CarID` bigint(11) NOT NULL,
   PRIMARY KEY (`OrderID`)
 );
 

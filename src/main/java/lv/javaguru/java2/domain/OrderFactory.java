@@ -52,7 +52,7 @@ public class OrderFactory {
             double grandTotal = rentAmount + accessoriesTotal;
 
             String orderId = createOrder(make, model, rentUntill, rentPrice,
-                    rentAmount, accessoriesTotal, grandTotal);
+                    rentAmount, accessoriesTotal, grandTotal, vehicleId);
 
             order = orderDAO.getById(orderId);
 
@@ -101,7 +101,7 @@ public class OrderFactory {
 
     @Transactional
     private String createOrder(String make, String model, String rentUntill, double rentPrice,
-                               double rentAmount, double accessoriesTotal, double grandTotal){
+                               double rentAmount, double accessoriesTotal, double grandTotal, String vehicleId){
 
         String createdOrderId = "";
         try{
@@ -113,6 +113,7 @@ public class OrderFactory {
             order.setRentAmount(rentAmount);
             order.setAccessoriesTotal(accessoriesTotal);
             order.setGrandTotal(grandTotal);
+            order.setVehicleId(Long.valueOf(vehicleId));
             createdOrderId = orderDAO.create(order);
 
         }catch (DBException e) {

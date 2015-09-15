@@ -28,6 +28,8 @@ public class Order {
     private double accessoriesTotal;
     @Column(name="GrandTotal")
     private double grandTotal;
+    @Column(name="CarID")
+    private long vehicleId;
 
     public long getOrderId() {
         return orderId;
@@ -91,5 +93,13 @@ public class Order {
 
     public void setGrandTotal(double grandTotal) {
         this.grandTotal = grandTotal;
+    }
+
+    public long getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(long vehicleId) {
+        this.vehicleId = vehicleId;
     }
 }

@@ -15,7 +15,6 @@ public class OrderControllerImpl implements OrderController {
     @Autowired
     private OrderFactory orderFactory;
 
-
     @Transactional
     public MVCModel processRequest(HttpServletRequest req) {
 
