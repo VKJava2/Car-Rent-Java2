@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by XidenT on 02/08/2015.
@@ -30,7 +32,7 @@ public class MiniBusDAOImpl extends DAOImpl implements MiniBusDAO {
         MiniBus miniBus;
         Long carId = Long.valueOf(id);
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(MiniBus.class);
-        criteria.add(Restrictions.eq("carId", id));
+        criteria.add(Restrictions.eq("carId", carId));
         return miniBus = (MiniBus) criteria.uniqueResult();
     }
 
@@ -48,4 +50,19 @@ public class MiniBusDAOImpl extends DAOImpl implements MiniBusDAO {
         criteria.add(Restrictions.eq("vehicleType", "MiniBus"));
         return miniBus = (List<MiniBus>) criteria.list();
     }
+
+    public Map<String, String> getSpecials(String id) throws DBException {
+        MiniBus miniBus;
+        Long carId = Long.valueOf(id);
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(MiniBus.class);
+        criteria.add(Restrictions.eq("carId", carId));
+        miniBus = (MiniBus) criteria.uniqueResult();
+        Map<String, String> typeSpecials = new HashMap<String, String>();
+        typeSpecials.put("MiniBusSeats", Integer.toString(miniBus.getSeatNumber()));
+        typeSpecials.put("CargoVolume", Double.toString(miniBus.getCargoVolume()));
+        typeSpecials.put("MiniBusSeats", miniBus.getMiniBusColor());
+        return typeSpecials;
+    }
+
 }
+

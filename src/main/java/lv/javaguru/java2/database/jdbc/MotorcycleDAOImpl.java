@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by VK on 2015.07.22..
@@ -48,5 +50,18 @@ public class MotorcycleDAOImpl extends DAOImpl implements MotorcycleDAO {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Motorcycle.class);
         criteria.add(Restrictions.eq("vehicleType", "Motorcycle"));
         return motorcycles = (List<Motorcycle>) criteria.list();
+    }
+
+    public Map<String, String> getSpecials(String id) throws DBException {
+        Motorcycle motorcycle;
+        Long carId = Long.valueOf(id);
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Motorcycle.class);
+        criteria.add(Restrictions.eq("carId", carId));
+        motorcycle = (Motorcycle) criteria.uniqueResult();
+        Map<String, String> typeSpecials = new HashMap<String, String>();
+        typeSpecials.put("MotorcycleType", motorcycle.getMotorcycleType());
+        typeSpecials.put("DriveType", motorcycle.getDriveType());
+        typeSpecials.put("EngineTypeByStrokes", motorcycle.getEngineTypeByStrokes());
+        return typeSpecials;
     }
 }

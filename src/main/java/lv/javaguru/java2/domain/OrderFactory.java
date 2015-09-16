@@ -75,6 +75,7 @@ public class OrderFactory {
         try {
             rentUntillDateFormat = dateFormat.parse(rentUntill);
             Date todayDate = new Date();
+            //Nado vstavitj proverku esli ukazana data bolee rannaja chem tekuschaja.
             periodOfRent = rentUntillDateFormat.getTime() - todayDate.getTime();
             periodOfRent = TimeUnit.DAYS.convert(periodOfRent, TimeUnit.MILLISECONDS);
 

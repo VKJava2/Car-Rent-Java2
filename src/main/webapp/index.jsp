@@ -36,7 +36,7 @@
                         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="#">Home1</a></li>
+                        <li class="active"><a href="./">Home</a></li>
                         <li><a href="#">Our Cars</a></li>
                         <li><a href="#">Conacts</a></li>
                         <li><a href="#">About Us</a></li>

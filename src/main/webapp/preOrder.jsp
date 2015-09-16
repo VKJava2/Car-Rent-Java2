@@ -2,6 +2,8 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="lv.javaguru.java2.domain.Accessory" %>
 <%@ page import="java.util.List" %>
+<%@ page import="lv.javaguru.java2.domain.Vehicle" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -10,13 +12,14 @@
 <body>
 <%
     Map<String, Object> preOrderData = (Map<String, Object>)request.getAttribute("model");
-    Motorcycle motorcycle = (Motorcycle)preOrderData.get("motorcycle");
+    Vehicle currentVehicle = (Vehicle) preOrderData.get("vehicle");
     List<Accessory> accessories = (List<Accessory>)preOrderData.get("accessories");
-    if(motorcycle != null) {
+    Map<String,String> vehicleSpecials = (HashMap<String,String>)preOrderData.get("specials");
+    if(currentVehicle != null) {
 %>
 <div style="width:250px; float:left; height:100px; border:1px solid #000; vertical-align: middle;text-align: center">
-    <h2><%=motorcycle.getMake()%></h2>
-    <h3><%=motorcycle.getModel()%></h3>
+    <h2><%=currentVehicle.getMake()%></h2>
+    <h3><%=currentVehicle.getModel()%></h3>
 </div>
 
 <div style="width:50px; float:left; height:100px">
@@ -32,8 +35,8 @@
         <%}%>
         Rent untill:
         <input type="date" name="Untill">
-        <input type="hidden" name="VehicleId" value="<%=motorcycle.getCarId()%>">
-        <input type="hidden" name="VehicleType" value="Motorcycle">
+        <input type="hidden" name="VehicleId" value="<%=currentVehicle.getCarId()%>">
+        <input type="hidden" name="VehicleType" value="<%=currentVehicle.getVehicleType()%>">
         <br><br>
         <input type="submit" value="Order">
     </form>
@@ -46,14 +49,18 @@
 
 <div style="clear: left">
     <ul>
-        <li><b>Production year:</b> <%=motorcycle.getProductionYear()%></li>
-        <li><b>Engine capacity:</b> <%=motorcycle.getEngineCapacity()%></li>
-        <li><b>Fuel type:</b> <%=motorcycle.getFuelType()%></li>
-        <li><b>Fuel consumption:</b> <%=motorcycle.getFuelConsumption()%></li>
-        <li><b>Rent price:</b> <%=String.format("%.2f", motorcycle.getRentPrice())%></li>
-        <li><b>Engine by strokes:</b> <%=motorcycle.getEngineTypeByStrokes()%></li>
-        <li><b>Drive type:</b> <%=motorcycle.getDriveType()%></li>
-        <li><b>Motorcycle type:</b> <%=motorcycle.getMotorcycleType()%></li>
+        <li><b>Production year:</b> <%=currentVehicle.getProductionYear()%></li>
+        <li><b>Engine capacity:</b> <%=currentVehicle.getEngineCapacity()%></li>
+        <li><b>Fuel type:</b> <%=currentVehicle.getFuelType()%></li>
+        <li><b>Fuel consumption:</b> <%=currentVehicle.getFuelConsumption()%></li>
+        <li><b>Rent price:</b> <%=String.format("%.2f", currentVehicle.getRentPrice())%></li>
+        <%
+			for (Map.Entry<String, String> entry : vehicleSpecials.entrySet()) {
+		%>
+					<li><b><%= entry.getKey() %>:</b> <%= entry.getValue() %></li>
+		<%
+			}
+    	%>
     </ul>
 </div>
 

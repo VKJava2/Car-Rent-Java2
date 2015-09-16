@@ -219,12 +219,12 @@ from car_rent.orders;
 insert into VEHICLES
 (Image, VehicleType, Make, Model, ProductionYear, EngineCapacity, FuelType, FuelConsumption, RentPrice, IsAvailable)
 values
-  ('toyota_rav4_2014.jpg', 'Motorcycle', 'Honda', 'CB600F Hornet', '2007', '0.6', 'Gasoline', '6.2', '60', '1'),
-  ('toyota_rav4_2014.jpg', 'Motorcycle', 'Suzuki', 'Boulevard C90T', '2013', '1.5', 'Gasoline', '7.8', '85', '1'),
-  ('toyota_rav4_2014.jpg', 'Motorcycle', 'BMW', 'S 1000RR', '2013', '1.0', 'Gasoline', '5.7', '105', '1'),
-  ('toyota_rav4_2014.jpg', 'Motorcycle', 'Harley-Davidson', 'Dyna', '2009', '1.7', 'Gasoline', '5.6', '90', '1'),
-  ('toyota_rav4_2014.jpg', 'Motorcycle', 'Yamaha', 'XVZ1300A', '2001', '1.3', 'Gasoline', '6.9', '75', '1'),
-  ('toyota_rav4_2014.jpg', 'Motorcycle', 'KTM', '300SX', '2014', '0.3', 'Gasoline', '5.8', '70', '1');
+  ('honda-cb600f-hornet.jpg', 'Motorcycle', 'Honda', 'CB600F Hornet', '2007', '0.6', 'Gasoline', '6.2', '60', '1'),
+  ('suzuki-boulevard-c50t.jpg', 'Motorcycle', 'Suzuki', 'Boulevard C90T', '2013', '1.5', 'Gasoline', '7.8', '85', '0'),
+  ('bmw-s1000rr-17.jpg', 'Motorcycle', 'BMW', 'S 1000RR', '2013', '1.0', 'Gasoline', '5.7', '105', '1'),
+  ('harley-davidson-fxdc-dyna.jpg', 'Motorcycle', 'Harley-Davidson', 'Dyna', '2009', '1.7', 'Gasoline', '5.6', '90', '1'),
+  ('yamaha-xvz-1300a.jpg', 'Motorcycle', 'Yamaha', 'XVZ1300A', '2001', '1.3', 'Gasoline', '6.9', '75', '0'),
+  ('ktm-300sx.jpg', 'Motorcycle', 'KTM', '300SX', '2014', '0.3', 'Gasoline', '5.8', '70', '1');
 
 
 insert into motorcycles
@@ -244,8 +244,7 @@ values
   ('mercedes_c200_2014.jpg', 'PersonalCar', 'Mercedes', 'C200', '2014', '2.0', 'Diesel', '10', '45', '1'),
   ('toyota_rav4_2014.jpg', 'PersonalCar', 'Toyota', 'RAV-4', '2013', '1.9', 'Fuel', '8.6', '50', '1'),
   ('volvo_S80_2014.jpg', 'PersonalCar', 'Volvo', 'S80', '2014', '1.8', 'Petrol', '7', '60', '1'),
-  ('volvo_S80_2014.jpg', 'PersonalCar', 'Volvo', 'V80', '2011', '1.8', 'Petrol', '7', '60', '1'),
-  ('mercedes_e180_2014.jpg', 'PersonalCar', 'Mercedes', 'E180', '2010', '2.0', 'Diesel', '7.3', '60', '1'),
+  ('mercedes_e180_2014.jpg', 'PersonalCar', 'Mercedes', 'E180', '2010', '2.0', 'Diesel', '7.3', '60', '0'),
   ('volvo_v60_2008.jpg', 'PersonalCar', 'Volvo', 'V60', '2009', '1.6', 'Petrol', '5.5', '50', '1');
 
 insert into personalCar
@@ -254,23 +253,22 @@ values
   ('Lux', '5', 'Sedan', '7'),
   ('SUV', '5', 'SUV', '8'),
   ('Lux', '5', 'Sedan', '9'),
-  ('Family', '5', 'Universal', '10'),
-  ('Lux', '5', 'Sedan', '11'),
-  ('Family', '5', 'Universal', '12');
+  ('Lux', '5', 'Sedan', '10'),
+  ('Family', '5', 'Universal', '11');
 
 insert into VEHICLES
 (Image, VehicleType, Make, Model, ProductionYear, EngineCapacity, FuelType, FuelConsumption, RentPrice, IsAvailable)
 values
-  ('volvo_v60_2008.jpg', 'MiniBus', 'Scania', 'Hispano', '2005', '3.5', 'Diesel', '13.9', '85', '1'),
-  ('volvo_v60_2008.jpg', 'MiniBus', 'Mercedes-Benz', 'Sprinter', '2013', '2.4', 'Gasoline', '14.4', '105', '1'),
-  ('volvo_v60_2008.jpg', 'MiniBus', 'Ford', 'Transit', '2007', '4.5', 'Diesel', '16.9', '74', '1');
+  ('scania.jpg', 'MiniBus', 'Scania', 'Hispano', '2005', '3.5', 'Diesel', '13.9', '85', '1'),
+  ('mb-sprinter.jpg', 'MiniBus', 'Mercedes-Benz', 'Sprinter', '2013', '2.4', 'Gasoline', '14.4', '105', '1'),
+  ('ford-transit.jpg', 'MiniBus', 'Ford', 'Transit', '2007', '4.5', 'Diesel', '16.9', '74', '1');
 
 insert into miniBus
 (MiniBusSeats, CargoVolume, MiniBusColor, CarID)
 values
-  ('12', '4.9', 'Yellow', '13'),
-  ('3', '50.7', 'Gray', '14'),
-  ('16', '12.6', 'White', '15');
+  ('12', '4.9', 'Yellow', '12'),
+  ('3', '50.7', 'Gray', '13'),
+  ('16', '12.6', 'White', '14');
 
 
 insert into ACCESSORIES
@@ -280,4 +278,10 @@ values
   ('Saddlebag', '5', 'Motorcycle'),
   ('Slip-on Exhaust', '4', 'Motorcycle'),
   ('Helmet Communicator', '6', 'Motorcycle'),
-  ('GoPro Camera', '3', 'Motorcycle');
+  ('GoPro Camera', '3', 'Motorcycle'),
+  ('Rooftop cargo carrier','5','PersonalCar'),
+  ('Rooftop bike carrier','5','PersonalCar'),
+  ('Wheel chains (4pcs)','2','PersonalCar'),
+  ('Wheel chains (4pcs)','2','MiniBus'),
+  ('TV+DVD','15','MiniBus'),
+  ('Audio system for guide','25','MiniBus');

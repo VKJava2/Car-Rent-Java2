@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
@@ -23,10 +25,11 @@ public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
 
     }
 
-    public PersonalCar getById(String carID) throws DBException {
+    public PersonalCar getById(String id) throws DBException {
         PersonalCar personalCar;
+        Long carId = Long.valueOf(id);
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PersonalCar.class);
-        criteria.add(Restrictions.eq("carId", carID));
+        criteria.add(Restrictions.eq("carId", carId));
         return personalCar = (PersonalCar) criteria.uniqueResult();
     }
 
@@ -73,5 +76,17 @@ public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
         criteria.add(Restrictions.eq("carId", id));
         personalCar = (PersonalCar) criteria.uniqueResult();
         sessionFactory.getCurrentSession().delete(personalCar);
+    }
+    public Map<String, String> getSpecials(String id) throws DBException {
+        PersonalCar personalCar;
+        Long carId = Long.valueOf(id);
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PersonalCar.class);
+        criteria.add(Restrictions.eq("carId", carId));
+        personalCar = (PersonalCar) criteria.uniqueResult();
+        Map<String, String> typeSpecials = new HashMap<String, String>();
+        typeSpecials.put("LuxuryType", personalCar.getLuxuryType());
+        typeSpecials.put("NumberOfDoors", personalCar.getNumberOfDoors());
+        typeSpecials.put("BodyType", personalCar.getBodyType());
+        return typeSpecials;
     }
 }

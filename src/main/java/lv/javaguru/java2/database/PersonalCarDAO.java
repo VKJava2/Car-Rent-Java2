@@ -3,6 +3,7 @@ package lv.javaguru.java2.database;
 import lv.javaguru.java2.domain.PersonalCar;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PersonalCarDAO {
 
@@ -21,4 +22,6 @@ public interface PersonalCarDAO {
     void delete(Long id) throws DBException;
 
     List<PersonalCar> getAll() throws DBException;
+
+    Map<String, String> getSpecials(String id) throws DBException;
 }

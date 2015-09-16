@@ -42,6 +42,7 @@ public class OrderTableCleaner {
                     if(todayDate.after(orderExpiration)){
                         vehicleId = String.valueOf(order.getVehicleId());
                         updateVehicleAvailibilty(className, vehicleId);
+                        //V kachestve realnogo funkcionala, mozhno ne stiratj order, a kidatj ego v tablicu -> Order History. Chtobi mozhno bilo bi potom prikrutitj modulj otchetov.
                         orderDAO.delete(order);
                     }
 

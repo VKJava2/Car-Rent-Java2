@@ -39,7 +39,7 @@
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="./">Home</a></li>
                 <li><a href="#">Our Cars</a></li>
                 <li><a href="#">Conacts</a></li>
                 <li><a href="#">About Us</a></li>
@@ -135,8 +135,8 @@
                                          alt="<%= VehicleList.get(carIndex).getModel()%>">
 
                                     <div class="caption">
-                                        <h3><%= VehicleList.get(carIndex).getMake() + " " + VehicleList.get(carIndex).getModel() %>
-                                        </h3>
+                                        <h3><%=VehicleList.get(carIndex).getMake()%></h3>
+										<h4><%=VehicleList.get(carIndex).getModel() %></h4>
                                         <ul>
                                             <li>Year: <%= VehicleList.get(carIndex).getProductionYear()%>
                                             </li>
@@ -149,8 +149,15 @@
                                         <p class="pull-right"><a
                                                 href="./car-info.jsp?id=<%= VehicleList.get(carIndex).getCarId() %>"
                                                 class="btn btn-success btn-responsive" role="button" name="booking">MORE INFO</a>
-                                            <a href="./booking.jsp?id=<%= VehicleList.get(carIndex).getCarId() %>"
-                                               class="btn btn-danger btn-responsive" role="button" name="booking">BOOK NOW</a>
+												<% 
+												String bookBtn = "";
+												if(!VehicleList.get(carIndex).isAvailable()) { 
+												bookBtn = "disabled";
+												
+												}
+												%>
+                                            <a href="./preOrder?id=<%= VehicleList.get(carIndex).getCarId() %>&t=p"
+                                               class="btn btn-danger btn-responsive <%= bookBtn %> " role="button" name="booking">BOOK NOW</a>
                                         </p>
                                     </div>
                                 </div>
