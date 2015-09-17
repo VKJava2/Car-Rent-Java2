@@ -58,9 +58,9 @@ public class MiniBusDAOImpl extends DAOImpl implements MiniBusDAO {
         criteria.add(Restrictions.eq("carId", carId));
         miniBus = (MiniBus) criteria.uniqueResult();
         Map<String, String> typeSpecials = new HashMap<String, String>();
-        typeSpecials.put("MiniBusSeats", Integer.toString(miniBus.getSeatNumber()));
-        typeSpecials.put("CargoVolume", Double.toString(miniBus.getCargoVolume()));
-        typeSpecials.put("MiniBusSeats", miniBus.getMiniBusColor());
+        typeSpecials.put("Minibus seats", Integer.toString(miniBus.getSeatNumber()));
+        typeSpecials.put("Cargo volume", Double.toString(miniBus.getCargoVolume()));
+        typeSpecials.put("Minibus color", miniBus.getMiniBusColor());
         return typeSpecials;
     }
 

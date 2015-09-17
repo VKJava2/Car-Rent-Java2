@@ -5,9 +5,6 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="lv.javaguru.java2.domain.Accessory" %>
 <%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="lv.javaguru.java2.domain.Order" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,66 +116,80 @@
         <!-- ============================== MAIN CONTENT BOX START ======================================= -->
         <div class="col-xs-12 col-sm-7 col-md-8 col-lg-8">
             <!-- JSP Injection to output list of chosen vehicle type -->
-
+            <%
+                Map<String, Object> preOrderData = (Map<String, Object>)request.getAttribute("model");
+                Vehicle currentVehicle = (Vehicle) preOrderData.get("vehicle");
+                List<Accessory> accessories = (List<Accessory>)preOrderData.get("accessories");
+                Map<String,String> vehicleSpecials = (HashMap<String,String>)preOrderData.get("specials");
+                String vType = "";
+                if(currentVehicle.getVehicleType().equals("Motorcycle"))
+                    vType = "m";
+                else if (currentVehicle.getVehicleType().equals("PersonalCar"))
+                    vType = "p";
+                else if (currentVehicle.getVehicleType().equals("MiniBus"))
+                    vType = "mb";
+                if(currentVehicle != null) {
+                    String image = "car_foto_500x333.png";
+                    if(!currentVehicle.getImage().isEmpty() || !currentVehicle.getImage().equals("empty")) {
+                        image = currentVehicle.getImage();
+                    }
+            %>
             <div class="thumbnail">
-                <h3><i>ORDER DETAILS</i></h3>
-                <hr>
-                <br>
-                <br>
-                <br>
-                <br>
-                <%
-                    Order order = (Order)request.getAttribute("model");
-                    if(order != null) {
-                %>
-                <table border="1" style="background-color:#FFFFCC;border-collapse:collapse;border:1px solid #FFCC00;color:#000000;width:100%" cellpadding="3" cellspacing="0">
-                    <tr>
-                        <td style="font-weight: 600; text-align: left;">&nbsp;&nbsp;Make</td>
-                        <td>&nbsp;&nbsp;<%=order.getMake()%></td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600; text-align: left;">&nbsp;&nbsp;Model</td>
-                        <td>&nbsp;&nbsp;<%=order.getModel()%></td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600; text-align: left;">&nbsp;&nbsp;Rent untill</td>
-                        <td>&nbsp;&nbsp;<%=order.getRentUntill()%></td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600; text-align: left;">&nbsp;&nbsp;Rent price</td>
-                        <td>&nbsp;&nbsp;<%=String.format("%.2f", order.getRentPrice())%></td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600; text-align: left;">&nbsp;&nbsp;Vehicle rent total</td>
-                        <td>&nbsp;&nbsp;<%=String.format("%.2f", order.getRentAmount())%></td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600; text-align: left;">&nbsp;&nbsp;Accessories Total</td>
-                        <td>&nbsp;&nbsp;<%=String.format("%.2f", order.getAccessoriesTotal())%></td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 800; text-align: right;">Grand Total&nbsp;&nbsp;</td>
-                        <td style="font-weight: 800; text-align: left;">&nbsp;&nbsp;<%=String.format("%.2f", order.getGrandTotal())+ " EUR"%></td>
-                    </tr>
-                </table>
-                <br>
-                <p class="pull-right"><a href="./" class="btn btn-success btn-responsive" role="button" name="booking">  BACK  </a></p>
+                    <div class="container-fluid">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                            <img src="./images/carimages/thumbs/<%= image %>" class="img-responsive" alt="-= Car Name =-">
+                        </div>
+                        <div class="col-md-1 col-lg-1">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <hr>
+                            <h3>VEHICLE INFORMATION</h3>
+                            <h4><%=currentVehicle.getMake() + " " + currentVehicle.getModel()%></h4>
+                            <ul>
+                                <li><b>Production year:</b> <%=currentVehicle.getProductionYear()%></li>
+                                <li><b>Engine capacity:</b> <%=currentVehicle.getEngineCapacity()%></li>
+                                <li><b>Fuel type:</b> <%=currentVehicle.getFuelType()%></li>
+                                <li><b>Fuel consumption:</b> <%=currentVehicle.getFuelConsumption()%></li>
+                                <li><b>Rent price:</b> <%=String.format("%.2f", currentVehicle.getRentPrice())%></li>
+                                <%
+                                    for (Map.Entry<String, String> entry : vehicleSpecials.entrySet()) {
+                                %>
+                                <li><b><%= entry.getKey() %>:</b> <%= entry.getValue() %></li>
+                                <%
+                                    }
+                                %>
+                            </ul>
 
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <br />
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item primary"><b><big>Available accessories</big></b></li>
+                                <%for(Accessory accessory : accessories) { %>
+                                <li class="list-group-item list-group-item"><%=accessory.getAccessory()%> | <small><i>Accessory description (when added)</i></small></li>
 
-                <%}
-                    else
-                    {%>
-                <h2>Error occured</h2><%
+                                <%}%>
+                            </ul>
+                            <p class="pull-right"><a
+                                    href="./"
+                                    class="btn btn-success btn-responsive" role="button" name="booking">  BACK  </a>
+                                <%
+                                    String bookBtnIsActive = "";
+                                    if(!currentVehicle.isAvailable()) {
+                                        bookBtnIsActive = "disabled";
+                                    }
+                                %>
+                                <a href="./preOrder?id=<%= currentVehicle.getCarId() %>&t=<%= vType %>"
+                                   class="btn btn-danger btn-responsive <%= bookBtnIsActive %> " role="button" name="booking">BOOK NOW</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <%
+                } else {
+
                 }
             %>
-            </div>
             </div>
             <div class="col-sm-3 col-md-2 col-lg-2">
                 <div class="panel">

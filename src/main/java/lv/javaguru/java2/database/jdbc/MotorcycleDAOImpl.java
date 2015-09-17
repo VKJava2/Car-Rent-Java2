@@ -59,9 +59,9 @@ public class MotorcycleDAOImpl extends DAOImpl implements MotorcycleDAO {
         criteria.add(Restrictions.eq("carId", carId));
         motorcycle = (Motorcycle) criteria.uniqueResult();
         Map<String, String> typeSpecials = new HashMap<String, String>();
-        typeSpecials.put("MotorcycleType", motorcycle.getMotorcycleType());
-        typeSpecials.put("DriveType", motorcycle.getDriveType());
-        typeSpecials.put("EngineTypeByStrokes", motorcycle.getEngineTypeByStrokes());
+        typeSpecials.put("Motorcycle type", motorcycle.getMotorcycleType());
+        typeSpecials.put("Drive type", motorcycle.getDriveType());
+        typeSpecials.put("Engine type by strokes", motorcycle.getEngineTypeByStrokes());
         return typeSpecials;
     }
 }

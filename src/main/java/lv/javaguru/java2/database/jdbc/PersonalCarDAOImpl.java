@@ -84,9 +84,9 @@ public class PersonalCarDAOImpl extends DAOImpl implements PersonalCarDAO {
         criteria.add(Restrictions.eq("carId", carId));
         personalCar = (PersonalCar) criteria.uniqueResult();
         Map<String, String> typeSpecials = new HashMap<String, String>();
-        typeSpecials.put("LuxuryType", personalCar.getLuxuryType());
-        typeSpecials.put("NumberOfDoors", personalCar.getNumberOfDoors());
-        typeSpecials.put("BodyType", personalCar.getBodyType());
+        typeSpecials.put("Luxury type", personalCar.getLuxuryType());
+        typeSpecials.put("Number of doors", personalCar.getNumberOfDoors());
+        typeSpecials.put("Body type", personalCar.getBodyType());
         return typeSpecials;
     }
 }
